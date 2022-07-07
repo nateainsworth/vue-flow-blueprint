@@ -1,5 +1,11 @@
 <script setup>
 import { Handle, Position } from '@braks/vue-flow';
+import childNode from './ChildNode.vue';
+import { computed } from 'vue';
+
+const sourceHandleStyleB = computed(() => ({
+  top: '20px',
+}));
 
 const props = defineProps({
   isValidTargetPos: {
@@ -16,43 +22,30 @@ export default {
 </script>
 
 <template>
-  <div>Only connectable with B</div>
+  <div class="vue-flow__nodeHeader">Question ...</div>
   <Handle
+    class="vue-flow__handleStyle"
     type="source"
-    :position="Position.Right"
+    :position="Position.Left"
     :is-valid-connection="props.isValidTargetPos"
+    :style="sourceHandleStyleB"
   />
+  <!--<div>
+    <childNode />
+  </div>-->
 </template>
 
 <style>
-.vue-flow__minimap {
-  transform: scale(75%);
-  transform-origin: bottom right;
+.vue-flow__nodeHeader {
+  width: calc(100%);
+  margin: -10px;
+  padding: 10px;
+  background-color: #d9d9d9;
 }
 
-.validationflow .vue-flow__node {
-  width: 150px;
-  border-radius: 5px;
-  padding: 10px;
-  color: #555;
-  border: 1px solid #ddd;
-  text-align: center;
-  font-size: 12px;
-}
-.validationflow .vue-flow__node-custominput {
-  background: #e6e6e9;
-  border: 1px solid #ddd;
-}
-.validationflow .vue-flow__node-custominput .vue-flow__handle {
-  background: #e6e6e9;
-}
-.validationflow .vue-flow__node-custominput {
-  background: #fff;
-}
-.validationflow .vue-flow__handle-connecting {
-  background: #ff6060;
-}
-.validationflow .vue-flow__handle-valid {
-  background: #55dd99;
+.vue-flow__handleStyle {
+  background-color: #373f8d;
+  width: 10px;
+  height: 10px;
 }
 </style>

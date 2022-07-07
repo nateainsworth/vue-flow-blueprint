@@ -1,5 +1,5 @@
 <script setup>
-import { useVueFlow } from '@braks/vue-flow';
+import { useVueFlow, Position } from '@braks/vue-flow';
 
 const flowKey = 'example-flow';
 
@@ -33,26 +33,65 @@ const onAdd = () => {
   const newNode = {
     id: `random_node-${id}`,
     type: 'custominput',
+    label: 'parent',
     //label: `Node ${id}`,
-    //targetHandle: Position.Right, // or Bottom, Left, Right,
-    //sourceHandle: Position.Right,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
     position: {
       x: dimensions.value.width / 2,
       y: dimensions.value.height / 2,
     },
-    class: 'light customNode',
+    style: {
+      backgroundColor: 'rgb(232 232 232)',
+      width: '200px',
+      height: '300px',
+    },
+    class: 'light',
   };
-  addNodes([newNode]);
+  const newChildNode = {
+    id: `child_node-${id}`,
+    type: 'childnode',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: {
+      x: 25,
+      y: 40,
+    },
+    extends: 'parent',
+    parentNode: `random_node-${id}`,
+    class: 'light lockedNode',
+  };
+  const newChildNode2 = {
+    id: `child_node-2-${id}`,
+    type: 'childnode',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: {
+      x: 25,
+      y: 80,
+    },
+    extends: 'parent',
+    parentNode: `random_node-${id}`,
+    class: 'light lockedNode',
+  };
+
+  addNodes([newNode, newChildNode, newChildNode2]); //
 };
 </script>
 
 <template>
   <div class="save__controls">
-    <button style="background-color: #33a6b8" @click="onSave">save</button>
-    <button style="background-color: #113285" @click="onRestore">
+    <button style="background-color: rgb(232 232 232)" @click="onSave">
+      save
+    </button>
+    <button style="background-color: rgb(232 232 232)" @click="onRestore">
       restore
     </button>
-    <button style="background-color: #6f3381" @click="onAdd">add node</button>
+    <button style="background-color: rgb(232 232 232)" @click="onAdd">
+      add node
+    </button>
   </div>
 </template>
 

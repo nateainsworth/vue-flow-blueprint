@@ -11,10 +11,12 @@ import useStore from './store.js';
 import AdditionalControls from './AdditionalControls.vue';
 import { ref } from 'vue';
 import CustomInput from './CustomInput.vue';
+import ChildNode from './ChildNode.vue';
 import { markRaw } from 'vue';
 
 const nodeTypes = {
   custominput: markRaw(CustomInput),
+  childnode: markRaw(ChildNode),
 };
 
 const store = useStore();
