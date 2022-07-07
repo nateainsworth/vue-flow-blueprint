@@ -21,3 +21,7 @@ body,
   background: #000000;
   color: #ffffff;
 }
+
+.lockedNode {
+  pointer-events: none !important;
+}

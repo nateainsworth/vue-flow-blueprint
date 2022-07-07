@@ -10,6 +10,12 @@ import { computed } from 'vue';
 import useStore from './store.js';
 import AdditionalControls from './AdditionalControls.vue';
 import { ref } from 'vue';
+import CustomInput from './CustomInput.vue';
+import { markRaw } from 'vue';
+
+const nodeTypes = {
+  custominput: markRaw(CustomInput),
+};
 
 const store = useStore();
 
@@ -23,7 +29,11 @@ onConnect((params) => addEdges([params]));
 </script>
 
 <template>
-  <VueFlow v-model="store.elements" :fit-view-on-init="true">
+  <VueFlow
+    v-model="store.elements"
+    :fit-view-on-init="true"
+    :node-types="nodeTypes"
+  >
     <AdditionalControls />
 
     <div style="position: absolute; right: 10px; top: 10px; z-index: 4">

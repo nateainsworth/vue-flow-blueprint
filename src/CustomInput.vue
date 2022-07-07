@@ -55,4 +55,11 @@ export default {
 .validationflow .vue-flow__handle-valid {
   background: #55dd99;
 }
+
+    --vf-node-color: #1a192b;
+    --vf-handle: var(--vf-node-color);
+    --vf-box-shadow: var(--vf-node-color);
+    background: var(--vf-node-bg);
+    border-color: var(--vf-node-color);
+
 </style>

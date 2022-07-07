@@ -1,6 +1,5 @@
 <script setup>
 import { useVueFlow } from '@braks/vue-flow';
-import CustomInput from './CustomInput.vue';
 
 const flowKey = 'example-flow';
 
@@ -33,7 +32,7 @@ const onAdd = () => {
   const id = nodes.value.length + 1;
   const newNode = {
     id: `random_node-${id}`,
-    type: CustomInput,
+    type: 'custominput',
     //label: `Node ${id}`,
     //targetHandle: Position.Right, // or Bottom, Left, Right,
     //sourceHandle: Position.Right,
@@ -41,7 +40,7 @@ const onAdd = () => {
       x: dimensions.value.width / 2,
       y: dimensions.value.height / 2,
     },
-    class: 'light',
+    class: 'light customNode',
   };
   addNodes([newNode]);
 };
