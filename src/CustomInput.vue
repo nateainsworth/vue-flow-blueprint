@@ -39,7 +39,7 @@ export default {
   text-align: center;
   font-size: 12px;
 }
-.validationflow .vue-flow__node-customnode {
+.validationflow .vue-flow__node-custominput {
   background: #e6e6e9;
   border: 1px solid #ddd;
 }
@@ -55,11 +55,4 @@ export default {
 .validationflow .vue-flow__handle-valid {
   background: #55dd99;
 }
-
-    --vf-node-color: #1a192b;
-    --vf-handle: var(--vf-node-color);
-    --vf-box-shadow: var(--vf-node-color);
-    background: var(--vf-node-bg);
-    border-color: var(--vf-node-color);
-
 </style>
