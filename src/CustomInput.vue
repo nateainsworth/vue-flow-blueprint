@@ -2,7 +2,6 @@
 import { Handle, Position } from '@braks/vue-flow';
 import childNode from './ChildNode.vue';
 import { computed } from 'vue';
-import CustomEdges from './CustomEdges.vue';
 
 const sourceHandleStyleB = computed(() => ({
   top: '20px',
@@ -31,7 +30,6 @@ export default {
     :is-valid-connection="props.isValidTargetPos"
     :style="sourceHandleStyleB"
   />
-  <CustomEdges />
 
   <!--<div>
     <childNode />

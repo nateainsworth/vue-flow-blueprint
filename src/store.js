@@ -4,7 +4,15 @@ import { isNode } from '@braks/vue-flow';
 const useStore = defineStore('elementsStore', {
   state() {
     return {
-      elements: [],
+      elements: [
+        {
+          id: '1',
+          type: 'startsessionnode',
+          label: 'Node 1',
+          position: { x: 250, y: 5 },
+          class: 'light',
+        },
+      ],
     };
   },
   actions: {

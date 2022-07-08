@@ -14,12 +14,6 @@ const {
   updateEdge,
 } = useVueFlow();
 
-const onEdgeUpdateStart = (edge) => console.log('start update', edge);
-const onEdgeUpdateEnd = (edge) => console.log('end update', edge);
-const onEdgeUpdate = ({ edge, connection }) => {
-  elements.value = updateEdge(edge, connection, elements.value);
-};
-
 const onSave = () => {
   localStorage.setItem(flowKey, JSON.stringify(toObject()));
 };
@@ -54,7 +48,6 @@ const onAdd = () => {
       height: '300px',
     },
     class: 'light',
-    updatable: true,
   };
   const newChildNode = {
     id: `child_node-${id}`,
@@ -69,7 +62,6 @@ const onAdd = () => {
     extends: 'parent',
     parentNode: `random_node-${id}`,
     class: 'light',
-    updatable: true,
     draggable: false,
   };
   const newChildNode2 = {
@@ -85,7 +77,6 @@ const onAdd = () => {
     extends: 'parent',
     parentNode: `random_node-${id}`,
     class: 'light',
-    updatable: true,
     draggable: false,
   };
 
