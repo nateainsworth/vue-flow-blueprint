@@ -7,16 +7,15 @@ import {
   MiniMap,
   updateEdge,
 } from '@braks/vue-flow';
-import { computed } from 'vue';
+import { onMounted, computed, ref, markRaw } from 'vue';
 import useStore from './store.js';
 import AdditionalControls from './AdditionalControls.vue';
-import { ref } from 'vue';
 import CustomInput from './CustomInput.vue';
 import ChildNode from './ChildNode.vue';
 import EndSessionNode from './EndSessionNode.vue';
 import StartSessionNode from './StartSessionNode.vue';
 
-import { markRaw } from 'vue';
+const elements = ref([]);
 
 const nodeTypes = {
   custominput: markRaw(CustomInput),
@@ -24,19 +23,14 @@ const nodeTypes = {
   endsessionnode: markRaw(EndSessionNode),
   startsessionnode: markRaw(StartSessionNode),
 };
-const onEdgeUpdateStart = (edge) => console.log('start update', edge);
-const onEdgeUpdateEnd = (edge) => console.log('end update', edge);
-const onEdgeUpdate = ({ edge, connection }) => {
-  store.elements.value = updateEdge(edge, connection, store.elements.value);
-};
 
 const store = useStore();
 
 const { onConnect, addEdges } = useVueFlow();
 
-onConnect((params) => addEdges([params]));
+//onConnect((params) => addEdges([params]));
 
-/*onConnect((params) => {
+onConnect((params) => {
   addEdges([
     {
       ...params,
@@ -44,11 +38,24 @@ onConnect((params) => addEdges([params]));
     },
   ]);
 });
-*/
 
 const getPosition = (event) => {
   console.log('event');
 };
+
+/*
+onMounted(() => {
+  elements.value = [
+    {
+      id: '1',
+      type: 'startsessionnode',
+      label: 'Node 1',
+      position: { x: 250, y: 5 },
+      class: 'light',
+    },
+  ];
+});
+*/
 </script>
 
 <template>
@@ -56,9 +63,9 @@ const getPosition = (event) => {
     v-model="store.elements"
     :fit-view-on-init="true"
     :node-types="nodeTypes"
-    @edge-update="onEdgeUpdate"
-    @edge-update-start="onEdgeUpdateStart"
-    @edge-update-end="onEdgeUpdateEnd"
+    @edge-update="store.onEdgeUpdate"
+    @edge-update-start="store.onEdgeUpdateStart"
+    @edge-update-end="store.onEdgeUpdateEnd"
   >
     <AdditionalControls />
 

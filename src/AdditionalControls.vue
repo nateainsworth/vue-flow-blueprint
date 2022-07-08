@@ -32,7 +32,7 @@ const onRestore = () => {
 const onAdd = () => {
   const id = nodes.value.length + 1;
   const newNode = {
-    id: `random_node-${id}`,
+    id: `question_node-${id}`,
     type: 'custominput',
     label: 'parent',
     //label: `Node ${id}`,
@@ -50,7 +50,7 @@ const onAdd = () => {
     class: 'light',
   };
   const newChildNode = {
-    id: `child_node-${id}`,
+    id: `answer_node-1-to-${id}`,
     type: 'childnode',
     //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
@@ -60,12 +60,12 @@ const onAdd = () => {
       y: 40,
     },
     extends: 'parent',
-    parentNode: `random_node-${id}`,
+    parentNode: `question_node-${id}`,
     class: 'light',
     draggable: false,
   };
   const newChildNode2 = {
-    id: `child_node-2-${id}`,
+    id: `answer_node-2-of-${id}`,
     type: 'childnode',
     //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
@@ -75,12 +75,29 @@ const onAdd = () => {
       y: 80,
     },
     extends: 'parent',
-    parentNode: `random_node-${id}`,
+    parentNode: `question_node-${id}`,
     class: 'light',
     draggable: false,
   };
 
   addNodes([newNode, newChildNode, newChildNode2]);
+};
+
+const onEndAdd = () => {
+  const id = nodes.value.length + 1;
+  const newNode = {
+    id: `End-Session-Node-${id}`,
+    type: 'endsessionnode',
+    label: 'parent',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: {
+      x: dimensions.value.width / 2,
+      y: dimensions.value.height / 2,
+    },
+  };
+  addNodes([newNode]);
 };
 </script>
 
@@ -94,6 +111,9 @@ const onAdd = () => {
     </button>
     <button style="background-color: rgb(232 232 232)" @click="onAdd">
       add node
+    </button>
+    <button style="background-color: rgb(232 232 232)" @click="onEndAdd">
+      add End node
     </button>
   </div>
 </template>
