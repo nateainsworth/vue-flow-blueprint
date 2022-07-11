@@ -99,9 +99,51 @@ const onEndAdd = () => {
   };
   addNodes([newNode]);
 };
-</script>
 
+function ToggleMenu() {
+  console.log('menu location', this.xPosition);
+}
+</script>
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  // type inference enabled
+  props: {
+    xPosition: String,
+    yPosition: String,
+  },
+  computed: {
+    style() {
+      return 'top: ' + this.yPosition + 'px; left: ' + this.xPosition + 'px;';
+    },
+  },
+  data() {
+    return {};
+  },
+  mounted() {
+    //this.xPosition = 0;
+    //this.yPosition = 100;
+    console.log('ypos: ' + this.yPosition);
+  },
+  actions: {
+    ToggleMenu() {
+      console.log('menu location', this.xPosition);
+    },
+  },
+});
+</script>
 <template>
+  <div :style="style" class="card flow-menu">
+    <div class="card-header">Add Node</div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" @click="onAdd">Question</li>
+      <li class="list-group-item">Intevention</li>
+      <li class="list-group-item">Branch Link</li>
+      <li class="list-group-item" @click="onEndAdd">End Session</li>
+    </ul>
+  </div>
+
   <div class="save__controls">
     <button style="background-color: rgb(232 232 232)" @click="onSave">
       save

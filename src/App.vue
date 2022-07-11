@@ -17,6 +17,9 @@ import StartSessionNode from './StartSessionNode.vue';
 
 const elements = ref([]);
 
+var xPos = 100;
+var yPos = 100;
+
 const nodeTypes = {
   custominput: markRaw(CustomInput),
   childnode: markRaw(ChildNode),
@@ -40,7 +43,7 @@ onConnect((params) => {
 });
 
 const getPosition = (event) => {
-  console.log('event');
+  //console.log('event');
 };
 
 /*
@@ -59,16 +62,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="card" style="width: 18rem">
-    <div class="card-header">Add Node</div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Question</li>
-      <li class="list-group-item">Intevention</li>
-      <li class="list-group-item">Branch Link</li>
-      <li class="list-group-item">End Session</li>
-    </ul>
-  </div>
-
   <VueFlow
     v-model="store.elements"
     :fit-view-on-init="true"
@@ -77,9 +70,9 @@ onMounted(() => {
     @edge-update-start="store.onEdgeUpdateStart"
     @edge-update-end="store.onEdgeUpdateEnd"
     @mousedown.right="getPosition(event)"
-    @contextmenu.prevent
   >
-    <AdditionalControls />
+    <!--  @contextmenu.prevent-->
+    <AdditionalControls x-position="{{xPos}}" y-position="${yPos}" />
 
     <div style="position: absolute; right: 10px; top: 10px; z-index: 4">
       <button style="margin-right: 5px" @click="store.updatePosition">
@@ -109,10 +102,19 @@ onMounted(() => {
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.flow-menu {
+  position: absolute;
+  background-color: #ffffff;
+  z-index: 5;
+  width: 10rem;
+  top: 200px;
+  left: 400px;
 }
 </style>
