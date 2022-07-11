@@ -121,6 +121,15 @@ export default defineComponent({
   data() {
     return {};
   },
+  watch: {
+    // It listens to the change in prop name
+    xPosition: function () {
+      console.log('x change'); // print out when the name changes
+    },
+    yPosition: function () {
+      console.log('y change'); // print out when the name changes
+    },
+  },
   mounted() {
     //this.xPosition = 0;
     //this.yPosition = 100;

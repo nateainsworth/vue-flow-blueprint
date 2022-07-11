@@ -17,9 +17,6 @@ import StartSessionNode from './StartSessionNode.vue';
 
 const elements = ref([]);
 
-var xPos = 100;
-var yPos = 100;
-
 const nodeTypes = {
   custominput: markRaw(CustomInput),
   childnode: markRaw(ChildNode),
@@ -42,10 +39,6 @@ onConnect((params) => {
   ]);
 });
 
-const getPosition = (event) => {
-  //console.log('event');
-};
-
 /*
 onMounted(() => {
   elements.value = [
@@ -60,6 +53,23 @@ onMounted(() => {
 });
 */
 </script>
+<script>
+export default {
+  data() {
+    return {
+      trigger: 0,
+      xPos: 100,
+      yPos: 100,
+    };
+  },
+  methods: {
+    getPosition(event) {
+      this.xPos = event.clientX;
+      this.yPos = event.clientY;
+    },
+  },
+};
+</script>
 
 <template>
   <VueFlow
@@ -69,10 +79,11 @@ onMounted(() => {
     @edge-update="store.onEdgeUpdate"
     @edge-update-start="store.onEdgeUpdateStart"
     @edge-update-end="store.onEdgeUpdateEnd"
-    @mousedown.right="getPosition(event)"
+    @mousedown.right="getPosition($event)"
+    @contextmenu.prevent
   >
     <!--  @contextmenu.prevent-->
-    <AdditionalControls x-position="{{xPos}}" y-position="${yPos}" />
+    <AdditionalControls :x-position="xPos" :y-position="yPos" />
 
     <div style="position: absolute; right: 10px; top: 10px; z-index: 4">
       <button style="margin-right: 5px" @click="store.updatePosition">
