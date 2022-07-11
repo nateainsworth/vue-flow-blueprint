@@ -78,9 +78,11 @@ export default {
     @edge-update="store.onEdgeUpdate"
     @edge-update-start="store.onEdgeUpdateStart"
     @edge-update-end="store.onEdgeUpdateEnd"
-    @mousedown.right="getPosition($event)"
   >
-    <!--  @contextmenu.prevent-->
+    <!--  
+      @mousedown.right="getPosition($event)"
+      @contextmenu.prevent
+    -->
     <AdditionalControls :x-position="xPos" :y-position="yPos" />
 
     <div style="position: absolute; right: 10px; top: 10px; z-index: 4">

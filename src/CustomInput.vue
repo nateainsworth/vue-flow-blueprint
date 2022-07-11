@@ -30,10 +30,13 @@ export default {
     :is-valid-connection="props.isValidTargetPos"
     :style="sourceHandleStyleB"
   />
-
-  <!--<div>
+  <!--
+  <template>
+    <childNode data-handleid="testing" />
+  </template>
+  <template>
     <childNode />
-  </div>-->
+  </template>-->
 </template>
 
 <style>

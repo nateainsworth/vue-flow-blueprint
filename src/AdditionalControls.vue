@@ -30,6 +30,9 @@ const onRestore = () => {
 };
 
 const onAdd = () => {
+  var answerQantity = 3;
+  var questionHeight = 47 + 40 * answerQantity;
+
   const id = nodes.value.length + 1;
   const newNode = {
     id: `question_node-${id}`,
@@ -45,25 +48,35 @@ const onAdd = () => {
     style: {
       backgroundColor: 'rgb(232 232 232)',
       width: '200px',
-      height: '300px',
+      height: `${questionHeight}px`,
     },
     class: 'light',
   };
-  const newChildNode = {
-    id: `answer_node-1-to-${id}`,
-    type: 'childnode',
-    //label: `Node ${id}`,
-    targetHandle: Position.Left, // or Bottom, Left, Right,
-    sourceHandle: Position.Left,
-    position: {
-      x: 25,
-      y: 40,
-    },
-    extends: 'parent',
-    parentNode: `question_node-${id}`,
-    class: 'light',
-    draggable: false,
-  };
+  addNodes([newNode]);
+
+  for (let i = 0; i < answerQantity; i++) {
+    console.log('adding answers');
+
+    let y = 40 + 40 * i;
+    const AnswerChildNode = {
+      id: `answer_node-${i}-to-${id}`,
+      type: 'childnode',
+      //label: `Node ${id}`,
+      targetHandle: Position.Left, // or Bottom, Left, Right,
+      sourceHandle: Position.Left,
+      position: {
+        x: 25,
+        y: y,
+      },
+      extent: 'parent',
+      parentNode: `question_node-${id}`,
+      class: 'light',
+      expandParent: true,
+      draggable: false,
+    };
+    addNodes([AnswerChildNode]);
+  }
+  /*
   const newChildNode2 = {
     id: `answer_node-2-of-${id}`,
     type: 'childnode',
@@ -74,13 +87,14 @@ const onAdd = () => {
       x: 25,
       y: 80,
     },
-    extends: 'parent',
     parentNode: `question_node-${id}`,
+    extent: 'parent',
     class: 'light',
+    expandParent: false,
     draggable: false,
   };
-
-  addNodes([newNode, newChildNode, newChildNode2]);
+*/
+  //, newChildNode, newChildNode2
 };
 
 const onEndAdd = () => {
@@ -146,8 +160,13 @@ export default defineComponent({
     CloseMenu() {
       this.toggle = false;
     },
-    onAdd() {
-      console.log('test');
+    onQuestionPressed() {
+      this.onAdd();
+      this.CloseMenu();
+    },
+    onEndPressed() {
+      this.onEndAdd();
+      this.CloseMenu();
     },
   },
 });
@@ -161,10 +180,14 @@ export default defineComponent({
   >
     <div class="card-header noselect">Add Node</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item noselect" @click="onAdd">Question</li>
+      <li class="list-group-item noselect" @click="onQuestionPressed">
+        Question
+      </li>
       <li class="list-group-item noselect">Intevention</li>
       <li class="list-group-item noselect">Branch Link</li>
-      <li class="list-group-item noselect" @click="onEndAdd">End Session</li>
+      <li class="list-group-item noselect" @click="onEndPressed">
+        End Session
+      </li>
     </ul>
   </div>
 
