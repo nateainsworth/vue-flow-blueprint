@@ -75,6 +75,8 @@ onMounted(() => {
     @edge-update="store.onEdgeUpdate"
     @edge-update-start="store.onEdgeUpdateStart"
     @edge-update-end="store.onEdgeUpdateEnd"
+    @mousedown.right="getPosition(event)"
+    @contextmenu.prevent
   >
     <AdditionalControls />
 
@@ -87,12 +89,8 @@ onMounted(() => {
       </button>
       <button @click="store.log">log store state</button>
     </div>
-    <Background pattern-color="#aaa" gap="8" @click="getPosition(event)" />
-    <div
-      class="background-area"
-      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0"
-      @click="getPosition(event)"
-    ></div>
+    <Background pattern-color="#aaa" gap="8" />
+
     <MiniMap />
     <Controls />
   </VueFlow>
