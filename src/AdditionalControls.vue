@@ -51,6 +51,7 @@ const onAdd = () => {
       height: `${questionHeight}px`,
     },
     class: 'light',
+    data: { questionID: id, questionText: 'example question' },
   };
   addNodes([newNode]);
 

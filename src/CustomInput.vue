@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { Handle, Position } from '@braks/vue-flow';
 import childNode from './ChildNode.vue';
 import { computed } from 'vue';
@@ -7,22 +7,32 @@ const sourceHandleStyleB = computed(() => ({
   top: '20px',
 }));
 
-const props = defineProps({
+interface QuestionNodeProps extends NodeProps {
   isValidTargetPos: {
-    type: Function,
-    required: false,
-  },
-});
+    type: Function;
+    required: false;
+  };
+  data: {
+    questionID: string;
+    questionText: string;
+  };
+}
+const props = defineProps<QuestionNodeProps>();
+
+/*
+const props = defineProps({
+
+});*/
 </script>
 
-<script>
+<script lang="ts">
 export default {
   inheritAttrs: false,
 };
 </script>
 
 <template>
-  <div class="vue-flow__nodeHeader">Question ...</div>
+  <div class="vue-flow__nodeHeader">Question {{ props.data.questionID }}</div>
   <Handle
     class="vue-flow__handleStyle"
     type="source"
