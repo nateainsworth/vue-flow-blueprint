@@ -57,7 +57,6 @@ onMounted(() => {
 export default {
   data() {
     return {
-      trigger: 0,
       xPos: 100,
       yPos: 100,
     };
@@ -80,19 +79,12 @@ export default {
     @edge-update-start="store.onEdgeUpdateStart"
     @edge-update-end="store.onEdgeUpdateEnd"
     @mousedown.right="getPosition($event)"
-    @contextmenu.prevent
   >
     <!--  @contextmenu.prevent-->
     <AdditionalControls :x-position="xPos" :y-position="yPos" />
 
     <div style="position: absolute; right: 10px; top: 10px; z-index: 4">
-      <button style="margin-right: 5px" @click="store.updatePosition">
-        update positions
-      </button>
-      <button style="margin-right: 5px" @click="store.toggleClass">
-        toggle class
-      </button>
-      <button @click="store.log">log store state</button>
+      <button class="flow-buttons" @click="store.log">log store state</button>
     </div>
     <Background pattern-color="#aaa" gap="8" />
 

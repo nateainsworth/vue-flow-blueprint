@@ -66,6 +66,25 @@ body {
   stroke-width: 3;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.flow-buttons {
+  background-color: rgb(255 255 255);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 4px 10px;
+  margin: 8px;
+  font-weight: bold;
+}
+
 /* -------------- bootstrap overides --------------- */
 
 .list-group-item {

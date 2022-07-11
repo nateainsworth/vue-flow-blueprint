@@ -19,25 +19,8 @@ const useStore = defineStore('elementsStore', {
     log() {
       console.log('stored elements', this.elements);
     },
-    toggleClass() {
-      console.log(this.elements);
-      this.elements.forEach(
-        (el) => (el.class = el.class === 'light' ? 'dark' : 'light')
-      );
-    },
-    updatePosition() {
-      this.elements.forEach((el) => {
-        if (isNode(el)) {
-          el.position = {
-            x: Math.random() * 400,
-            y: Math.random() * 400,
-          };
-        }
-      });
-    },
     onEdgeUpdateStart(edge) {
       console.log('start update', edge);
-      console.log(this.elements);
     },
     onEdgeUpdateEnd(edge) {
       console.log('end update', edge);

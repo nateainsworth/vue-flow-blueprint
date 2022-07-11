@@ -119,15 +119,19 @@ export default defineComponent({
     },
   },
   data() {
-    return {};
+    return {
+      toggle: false,
+    };
   },
   watch: {
     // It listens to the change in prop name
     xPosition: function () {
-      console.log('x change'); // print out when the name changes
+      console.log('x change');
+      this.toggle = true; // print out when the name changes
     },
     yPosition: function () {
-      console.log('y change'); // print out when the name changes
+      console.log('y change');
+      this.toggle = true; // print out when the name changes
     },
   },
   mounted() {
@@ -135,37 +139,40 @@ export default defineComponent({
     //this.yPosition = 100;
     console.log('ypos: ' + this.yPosition);
   },
-  actions: {
+  methods: {
     ToggleMenu() {
       console.log('menu location', this.xPosition);
+    },
+    CloseMenu() {
+      this.toggle = false;
+    },
+    onAdd() {
+      console.log('test');
     },
   },
 });
 </script>
 <template>
-  <div :style="style" class="card flow-menu">
-    <div class="card-header">Add Node</div>
+  <div
+    v-if="toggle"
+    :style="style"
+    class="card flow-menu"
+    v-click-outside="CloseMenu"
+  >
+    <div class="card-header noselect">Add Node</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" @click="onAdd">Question</li>
-      <li class="list-group-item">Intevention</li>
-      <li class="list-group-item">Branch Link</li>
-      <li class="list-group-item" @click="onEndAdd">End Session</li>
+      <li class="list-group-item noselect" @click="onAdd">Question</li>
+      <li class="list-group-item noselect">Intevention</li>
+      <li class="list-group-item noselect">Branch Link</li>
+      <li class="list-group-item noselect" @click="onEndAdd">End Session</li>
     </ul>
   </div>
 
   <div class="save__controls">
-    <button style="background-color: rgb(232 232 232)" @click="onSave">
-      save
-    </button>
-    <button style="background-color: rgb(232 232 232)" @click="onRestore">
-      restore
-    </button>
-    <button style="background-color: rgb(232 232 232)" @click="onAdd">
-      add node
-    </button>
-    <button style="background-color: rgb(232 232 232)" @click="onEndAdd">
-      add End node
-    </button>
+    <button class="flow-buttons" @click="onSave">save</button>
+    <button class="flow-buttons" @click="onRestore">restore</button>
+    <button class="flow-buttons" @click="onAdd">add node</button>
+    <button class="flow-buttons" @click="onEndAdd">add End node</button>
   </div>
 </template>
 
@@ -175,5 +182,9 @@ export default defineComponent({
   z-index: 100;
   top: 10px;
   left: 20px;
+}
+
+.flow-menu .list-group-item:hover {
+  background-color: #e5e5e5;
 }
 </style>
