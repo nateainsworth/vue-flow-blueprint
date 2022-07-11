@@ -69,11 +69,6 @@ onMounted(() => {
   >
     <AdditionalControls />
 
-    <div
-      class="background-area"
-      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0"
-      @click="getPosition(event)"
-    ></div>
     <div style="position: absolute; right: 10px; top: 10px; z-index: 4">
       <button style="margin-right: 5px" @click="store.updatePosition">
         update positions
@@ -83,12 +78,12 @@ onMounted(() => {
       </button>
       <button @click="store.log">log store state</button>
     </div>
+    <Background pattern-color="#aaa" gap="8" @click="getPosition(event)" />
     <div
       class="background-area"
-      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0 z-index: 3;"
-      @click="getPosition(event)"
-    ></div>
-    <Background pattern-color="#aaa" gap="8" @click="getPosition(event)" />
+      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
+      @click="getPosition(event)">
+    </div>
     <MiniMap />
     <Controls />
   </VueFlow>
