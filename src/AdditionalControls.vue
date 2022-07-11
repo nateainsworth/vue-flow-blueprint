@@ -73,6 +73,7 @@ const onAdd = () => {
       class: 'light',
       expandParent: true,
       draggable: false,
+      data: { answerID: i + 1, answerText: 'example answer' },
     };
     addNodes([AnswerChildNode]);
   }
