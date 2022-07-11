@@ -59,6 +59,15 @@ onMounted(() => {
 </script>
 
 <template>
+  <div class="card" style="width: 18rem">
+    <div class="card-header">Featured</div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+    </ul>
+  </div>
+
   <VueFlow
     v-model="store.elements"
     :fit-view-on-init="true"
@@ -81,9 +90,9 @@ onMounted(() => {
     <Background pattern-color="#aaa" gap="8" @click="getPosition(event)" />
     <div
       class="background-area"
-      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
-      @click="getPosition(event)">
-    </div>
+      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0"
+      @click="getPosition(event)"
+    ></div>
     <MiniMap />
     <Controls />
   </VueFlow>
