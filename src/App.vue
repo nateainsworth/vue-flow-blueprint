@@ -60,11 +60,12 @@ onMounted(() => {
 
 <template>
   <div class="card" style="width: 18rem">
-    <div class="card-header">Featured</div>
+    <div class="card-header">Add Node</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">An item</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">Question</li>
+      <li class="list-group-item">Intevention</li>
+      <li class="list-group-item">Branch Link</li>
+      <li class="list-group-item">End Session</li>
     </ul>
   </div>
 

@@ -38,7 +38,7 @@ export default {
 
 <style>
 .vue-flow__nodeHeader {
-  width: calc(100%);
+  width: calc(100% + 20px);
   margin: -10px;
   padding: 10px;
   background-color: #d9d9d9;
