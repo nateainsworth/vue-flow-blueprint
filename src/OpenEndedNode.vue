@@ -35,7 +35,7 @@ export default {
 <template>
   <div class="openText">Open Ended Answer</div>
   <Handle type="source" :position="Position.Right" />
-  <div class="weightBtn">Add Weight</div>
+  <!--<div class="weightBtn">Add Weight</div>-->
   <!--:is-valid-connection="props.isValidTargetPos"-->
 </template>
 
@@ -61,16 +61,7 @@ export default {
     height: 10px;
 }
 
-.vue-flow__node-opennode .weightBtn{
-    text-align:center;
-    background-color:#586e8a;
-    color: #ffffff;
-    border-radius:30px;
-    position:absolute;
-    width: 100%;
-    bottom:-25px;
-    
-}
+
 
 /*
 background: #586e8a;

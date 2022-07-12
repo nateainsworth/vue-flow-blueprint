@@ -108,12 +108,13 @@ const onDrop = (event) => {
   var answerQantity = Object.keys(questionAnswers.Answers).length;
   
   var questionHeight = 47 + 40 * answerQantity;
-  let openended = false;
+  var openended = false;
   if(answerQantity == 0){
     var questionHeight = 47 + 40+20;
     openended = true;
   }
 
+console.log("is open:" + openended)
   
   //const id = nodes.value.length + 1;
   const newNode = {
@@ -129,7 +130,7 @@ const onDrop = (event) => {
       height: `${questionHeight}px`,
     },
     class: 'light',
-    data: { questionID: questionID, questionText: 'example question', questionShort: questionShort,openEnded:openended, event:{
+    data: { questionID: questionID, questionText: 'example question', questionShort: questionShort,openEnded: openended, event:{
       click: () => {
         console.log('Node activated')
       },

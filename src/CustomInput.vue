@@ -39,9 +39,8 @@ const onAddWeight = () => {
 
 <script lang="ts">
 export default {
-  inheritAttrs: false,
+  inheritAttrs: true,
 };
-
 </script>
 
 <template>
@@ -53,14 +52,8 @@ export default {
     
     :style="sourceHandleStyleB"
   />
-  <!--
-        
-  <template>
-    <childNode data-handleid="testing" />
-  </template>
-  <template>
-    <childNode />
-  </template>-->
+  <div v-if="props.data.openEnded" @click="onAddWeight" class="weightBtn">Add Weight</div>
+
 </template>
 
 <style>
@@ -79,6 +72,17 @@ export default {
   border: solid 2px #586e8a;
   width: 10px;
   height: 10px;
+}
+
+.vue-flow__node-custominput .weightBtn{
+    text-align:center;
+    background-color:#586e8a;
+    color: #ffffff;
+    border-radius:30px;
+    position:absolute;
+    width: calc(100% - 20px);
+    bottom:5px;
+    
 }
 
 .vue-flow__node-custominput .vue-flow__handle-left {
