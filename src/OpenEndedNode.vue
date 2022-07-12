@@ -1,17 +1,18 @@
 <script lang="ts" setup>
 import { Handle, Position, NodeProps } from '@braks/vue-flow';
 
-interface AnswerNodeProps extends NodeProps {
+interface OpenEndedNodeProps extends NodeProps {
   data: {
-    answerID: string;
-    answerText: string;
+    nodeText: string;
+    parentID: string;
   };
+  
   /*isValidTargetPos: {
     type: Function;
     required: false;
   };*/
 }
-const additionalProps = defineProps<AnswerNodeProps>();
+const Props = defineProps<OpenEndedNodeProps>();
 
 /*const props = defineProps({
   isValidTargetPos: {
@@ -19,12 +20,9 @@ const additionalProps = defineProps<AnswerNodeProps>();
     required: false,
   },
 });*/
-function shorten(str, maxLen, separator = ' ') {
-  if (str.length <= maxLen) return str;
-  return str.substr(0, str.lastIndexOf(separator, maxLen)) + "...";
-}
 
-const shortenedAnswer = shorten(additionalProps.data.answerText, 30);
+
+
 
 </script>
 
@@ -35,25 +33,26 @@ export default {
 </script>
 
 <template>
-  <div class="answers">{{ additionalProps.data.answerID }}: {{ shortenedAnswer }}</div>
+  <div class="openText">Open Ended Answer</div>
   <Handle type="source" :position="Position.Right" />
+  <div class="weightBtn">Add Weight</div>
   <!--:is-valid-connection="props.isValidTargetPos"-->
 </template>
 
 <style>
 
-.vue-flow__node-childnode{
+.vue-flow__node-opennode{
   border:none;
   padding: 10px 0px;
   text-align:left;
   
 }
 
-.vue-flow__node-childnode .answers{
+.vue-flow__node-opennode .openText{
   font-size: 9px;
 }
 
-.vue-flow__node-childnode .vue-flow__handle {
+.vue-flow__node-opennode .vue-flow__handle {
     background: #586e8a;
     /*border: 1px solid #586e8a;*/
      border: 2px solid #e8e8e8;
@@ -61,6 +60,18 @@ export default {
     width: 10px;
     height: 10px;
 }
+
+.vue-flow__node-opennode .weightBtn{
+    text-align:center;
+    background-color:#586e8a;
+    color: #ffffff;
+    border-radius:30px;
+    position:absolute;
+    width: 100%;
+    bottom:-25px;
+    
+}
+
 /*
 background: #586e8a;
     border: 2px solid #e8e8e8;

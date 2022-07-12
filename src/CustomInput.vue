@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Handle, Position } from '@braks/vue-flow';
+import { Handle, Position, NodeEventsOn ,NodeProps } from '@braks/vue-flow';
 import childNode from './ChildNode.vue';
 import { computed } from 'vue';
 
@@ -7,29 +7,41 @@ const sourceHandleStyleB = computed(() => ({
   top: '20px',
 }));
 
+
+
 interface QuestionNodeProps extends NodeProps {
-  isValidTargetPos: {
-    type: Function;
-    required: false;
-  };
+
   data: {
     questionID: string;
     questionText: string;
     questionShort: string;
+    openEnded:Boolean;
+    event: NodeEventsOn['click'];
   };
+  
 }
 const props = defineProps<QuestionNodeProps>();
+
+console.log(props);
+//props.events.customEvent();
+
 
 /*
 const props = defineProps({
 
 });*/
+const onAddWeight = () => {
+  props.data.event.click(() => {
+  })
+}
+
 </script>
 
 <script lang="ts">
 export default {
   inheritAttrs: false,
 };
+
 </script>
 
 <template>
@@ -38,10 +50,11 @@ export default {
     class="vue-flow__handleStyle"
     type="source"
     :position="Position.Left"
-    :is-valid-connection="props.isValidTargetPos"
+    
     :style="sourceHandleStyleB"
   />
   <!--
+        
   <template>
     <childNode data-handleid="testing" />
   </template>

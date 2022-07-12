@@ -16,6 +16,7 @@ import ChildNode from './ChildNode.vue';
 import EndSessionNode from './EndSessionNode.vue';
 import StartSessionNode from './StartSessionNode.vue';
 import Sidebar from './SideBar.vue';
+import OpenEndedNode from './OpenEndedNode.vue';
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -27,6 +28,7 @@ const nodeTypes = {
   childnode: markRaw(ChildNode),
   endsessionnode: markRaw(EndSessionNode),
   startsessionnode: markRaw(StartSessionNode),
+  opennode: markRaw(OpenEndedNode),
 };
 
 const store = useStore();
@@ -41,6 +43,7 @@ const {
   edges,
   onPaneReady,
   instance,
+  updateNodeInternals,
 } = useVueFlow();
 
 //onConnect((params) => addEdges([params]));
@@ -76,6 +79,8 @@ const onDragOver = (event) => {
   }
 };
 
+
+
 //const position = vueFlowInstance.project({ x: event.clientX - 40, y: event.clientY - 18 });
 
 //var newinstance;
@@ -101,14 +106,20 @@ const onDrop = (event) => {
   
 
   var answerQantity = Object.keys(questionAnswers.Answers).length;
+  
   var questionHeight = 47 + 40 * answerQantity;
+  let openended = false;
+  if(answerQantity == 0){
+    var questionHeight = 47 + 40+20;
+    openended = true;
+  }
 
+  
   //const id = nodes.value.length + 1;
   const newNode = {
     id: `question_node-${questionID}`,
     type: 'custominput',
     label: 'parent',
-    //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
     sourceHandle: Position.Left,
     position: position,
@@ -118,13 +129,20 @@ const onDrop = (event) => {
       height: `${questionHeight}px`,
     },
     class: 'light',
-    data: { questionID: questionID, questionText: 'example question', questionShort: questionShort },
+    data: { questionID: questionID, questionText: 'example question', questionShort: questionShort,openEnded:openended, event:{
+      click: () => {
+        console.log('Node activated')
+      },
+    
+      
+    },
+    },
+    
+    
   };
   addNodes([newNode]);
 
   for (let i = 0; i < answerQantity; i++) {
-    console.log('adding answers');
-
     let y = 40 + 40 * i;
     const AnswerChildNode = {
       id: `answer_node-${i}-to-${questionID}`,
@@ -144,6 +162,27 @@ const onDrop = (event) => {
       data: { answerID: i + 1, answerText: questionAnswers.Answers[i]},
     };
     addNodes([AnswerChildNode]);
+  }
+  if(answerQantity == 0){
+      let y = 40;
+      const openEndedNode = {
+      id: `openended_node-to-${questionID}`,
+      type: 'opennode',
+      //label: `Node ${id}`,
+      targetHandle: Position.Left, // or Bottom, Left, Right,
+      sourceHandle: Position.Left,
+      position: {
+        x: 25,
+        y: y,
+      },
+      extent: 'parent',
+      parentNode: `question_node-${questionID}`,
+      class: 'light',
+      expandParent: true,
+      draggable: false,
+      data: { answerID: 'Open Ended'},
+    };
+    addNodes([openEndedNode]);
   }
 
 };
