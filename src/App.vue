@@ -114,6 +114,31 @@ const onDrop = (event) => {
     openended = true;
   }
 
+  var weightID = 1;
+
+  function addWeights (parentID){
+      let y = 60 + 40 * weightID;
+      const openEndedNode = {
+      id: `openended_node-${weightID}-to-${parentID}`,
+      type: 'opennode',
+      //label: `Node ${id}`,
+      targetHandle: Position.Left, // or Bottom, Left, Right,
+      sourceHandle: Position.Left,
+      position: {
+        x: 25,
+        y: y,
+      },
+      extent: 'parent',
+      parentNode: `question_node-${parentID}`,
+      class: 'light',
+      expandParent: true,
+      draggable: false,
+      data: { answerID: '100',isWeight:true,parentID:parentID},
+    };
+    addNodes([openEndedNode]);
+    weightID++;
+  }
+
 console.log("is open:" + openended)
   
   //const id = nodes.value.length + 1;
@@ -133,6 +158,7 @@ console.log("is open:" + openended)
     data: { questionID: questionID, questionText: 'example question', questionShort: questionShort,openEnded: openended, event:{
       click: () => {
         console.log('Node activated')
+        addWeights (questionID)
       },
     
       
@@ -165,7 +191,7 @@ console.log("is open:" + openended)
     addNodes([AnswerChildNode]);
   }
   if(answerQantity == 0){
-      let y = 40;
+      let y = 60;
       const openEndedNode = {
       id: `openended_node-to-${questionID}`,
       type: 'opennode',
@@ -181,7 +207,7 @@ console.log("is open:" + openended)
       class: 'light',
       expandParent: true,
       draggable: false,
-      data: { answerID: 'Open Ended'},
+      data: { answerID: 'Open Ended',isWeight:false,parentID:questionID},
     };
     addNodes([openEndedNode]);
   }

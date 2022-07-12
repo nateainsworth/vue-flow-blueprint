@@ -44,6 +44,7 @@ export default {
 </script>
 
 <template>
+
   <div class="vue-flow__nodeHeader">{{ props.data.questionShort }}</div>
   <Handle
     class="vue-flow__handleStyle"

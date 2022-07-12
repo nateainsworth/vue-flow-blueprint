@@ -5,6 +5,7 @@ interface OpenEndedNodeProps extends NodeProps {
   data: {
     nodeText: string;
     parentID: string;
+    isWeight: Boolean;
   };
   
   /*isValidTargetPos: {
@@ -12,7 +13,7 @@ interface OpenEndedNodeProps extends NodeProps {
     required: false;
   };*/
 }
-const Props = defineProps<OpenEndedNodeProps>();
+const props = defineProps<OpenEndedNodeProps>();
 
 /*const props = defineProps({
   isValidTargetPos: {
@@ -33,7 +34,8 @@ export default {
 </script>
 
 <template>
-  <div class="openText">Open Ended Answer</div>
+  <div v-if="!props.data.isWeight" class="openText">Open Ended Answer</div>
+  <div v-else class="openText">Weighted</div>
   <Handle type="source" :position="Position.Right" />
   <!--<div class="weightBtn">Add Weight</div>-->
   <!--:is-valid-connection="props.isValidTargetPos"-->
