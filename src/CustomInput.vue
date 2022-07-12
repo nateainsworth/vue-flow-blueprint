@@ -80,10 +80,11 @@ export default {
     background-color:#586e8a;
     color: #ffffff;
     border-radius:30px;
-    position:absolute;
+    margin: 15px 0px;
+    /*position:absolute;
     width: calc(100% - 20px);
     bottom:5px;
-    
+*/    
 }
 
 .vue-flow__node-custominput .vue-flow__handle-left {

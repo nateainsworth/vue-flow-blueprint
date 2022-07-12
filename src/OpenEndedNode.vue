@@ -35,7 +35,8 @@ export default {
 
 <template>
   <div v-if="!props.data.isWeight" class="openText">Open Ended Answer</div>
-  <div v-else class="openText">Weighted</div>
+  <div v-else class="openText"><input type="text" placeholder="Keyword Weight"/></div>
+
   <Handle type="source" :position="Position.Right" />
   <!--<div class="weightBtn">Add Weight</div>-->
   <!--:is-valid-connection="props.isValidTargetPos"-->
