@@ -87,8 +87,9 @@ const onDrop = (event) => {
   //todo: use type in if statement to work out what is being added
 
   const questionID = event.dataTransfer?.getData('questionID');
-  var questionText = event.dataTransfer?.getData('questionText');
+  const questionText = event.dataTransfer?.getData('questionText');
   const questionAnswers = JSON.parse(event.dataTransfer?.getData('questionAnswers'));
+  const questionShort = event.dataTransfer.getData('questionShort');
 
   const position = instance.value.project({
       x: event.clientX,
@@ -117,7 +118,7 @@ const onDrop = (event) => {
       height: `${questionHeight}px`,
     },
     class: 'light',
-    data: { questionID: questionID, questionText: 'example question' },
+    data: { questionID: questionID, questionText: 'example question', questionShort: questionShort },
   };
   addNodes([newNode]);
 
@@ -140,7 +141,7 @@ const onDrop = (event) => {
       class: 'light',
       expandParent: true,
       draggable: false,
-      data: { answerID: i + 1, answerText: 'example answer' },
+      data: { answerID: i + 1, answerText: questionAnswers.Answers[i]},
     };
     addNodes([AnswerChildNode]);
   }

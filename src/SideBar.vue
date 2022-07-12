@@ -1,5 +1,5 @@
 <script setup>
-var questions ='[{"id":1,"QuestionIndex":"1","Question":"How is your mood, choose a response that is closest to how you’ve been feeling over the previous week?","Answers":"{\\"Answers\\" :[\\"Always in a good mood\\",\\"mostly happy the odd bad days\\",\\"More good days than bad\\",\\"testing\\"]}","Type":null,"Session_Allocation":1},{"id":2,"QuestionIndex":"2","Question":"How is your mood, choose a response that is closest to how you’ve been feeling over the previous week?","Answers":"{\\"Answers\\" :[\\"Always in a good mood\\",\\"mostly happy the odd bad days\\",\\"More good days than bad\\",\\"Feel low most of the time\\",\\"Always feel extremely low\\",\\"None of these\\"]}","Type":null,"Session_Allocation":1},{"id":3,"QuestionIndex":"1.1","Question":"Can you tell me a bit more about how you’re feeling?","Answers":"{\\"Answers\\" :[]}","Type":null,"Session_Allocation":1}]';
+var questions ='[{"id":1,"QuestionShort":"Mood question","QuestionIndex":"1","Question":"How is your mood, choose a response that is closest to how you’ve been feeling over the previous week?","Answers":"{\\"Answers\\" :[\\"Always in a good mood\\",\\"mostly happy the odd bad days\\",\\"More good days than bad\\",\\"testing\\"]}","Type":null,"Session_Allocation":1},{"id":2,"QuestionShort":"Second mood question","QuestionIndex":"2","Question":"How is your mood, choose a response that is closest to how you’ve been feeling over the previous week?","Answers":"{\\"Answers\\" :[\\"Always in a good mood\\",\\"mostly happy the odd bad days\\",\\"More good days than bad\\",\\"Feel low most of the time\\",\\"Always feel extremely low\\",\\"None of these\\"]}","Type":null,"Session_Allocation":1},{"id":3,"QuestionShort":"How are you feeling","QuestionIndex":"1.1","Question":"Can you tell me a bit more about how you’re feeling?","Answers":"{\\"Answers\\" :[]}","Type":null,"Session_Allocation":1}]';
 
 var questionsData = JSON.parse(questions);
 console.log(questionsData[2].id);
@@ -12,6 +12,7 @@ const onDragStart = (event, nodeType, questionID) => {
     event.dataTransfer.setData('questionID',questionsData[questionID].id);
     event.dataTransfer.setData('questionText',questionsData[questionID].Question);
     event.dataTransfer.setData('questionAnswers',questionsData[questionID].Answers);
+    event.dataTransfer.setData('questionShort',questionsData[questionID].QuestionShort);
 
   }
 };

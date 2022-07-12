@@ -19,6 +19,15 @@ const additionalProps = defineProps<AnswerNodeProps>();
     required: false,
   },
 });*/
+function shorten(str, maxLen, separator = ' ') {
+  if (str.length <= maxLen) return str;
+  return str.substr(0, str.lastIndexOf(separator, maxLen));
+}
+console.log(shorten("The quick brown fox jumps over the lazy dog", 25));
+
+const trimmedAnswer = additionalProps.data.answerText.substring(0, 80);
+const shortenedAnswer = shorten(additionalProps.data.answerText, 25);//= trimmedAnswer.substring(0, Math.min(trimmedAnswer.length, trimmedAnswer.lastIndexOf(" ")))
+
 </script>
 
 <script lang="ts">
@@ -28,7 +37,7 @@ export default {
 </script>
 
 <template>
-  <div>Answer {{ additionalProps.data.answerID }}</div>
+  <div>{{ additionalProps.data.answerID }}: {{ shortenedAnswer }}</div>
   <Handle type="source" :position="Position.Right" />
   <!--:is-valid-connection="props.isValidTargetPos"-->
 </template>
@@ -37,6 +46,8 @@ export default {
 
 .vue-flow__node-childnode{
   border:none;
+  padding: 10px 0px;
+  text-align:left;
 }
 
 .vue-flow__node-childnode .vue-flow__handle {

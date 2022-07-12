@@ -15,6 +15,7 @@ interface QuestionNodeProps extends NodeProps {
   data: {
     questionID: string;
     questionText: string;
+    questionShort: string;
   };
 }
 const props = defineProps<QuestionNodeProps>();
@@ -32,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="vue-flow__nodeHeader">Question {{ props.data.questionID }}</div>
+  <div class="vue-flow__nodeHeader">{{ props.data.questionShort }}</div>
   <Handle
     class="vue-flow__handleStyle"
     type="source"
