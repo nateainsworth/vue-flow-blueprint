@@ -126,8 +126,8 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   // type inference enabled
   props: {
-    xPosition: String,
-    yPosition: String,
+    xPosition: Number,
+    yPosition: Number,
   },
   computed: {
     style() {

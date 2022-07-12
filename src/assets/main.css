@@ -66,6 +66,54 @@ body {
   stroke-width: 3;
 }
 
+.dndflow {
+  flex-direction: column;
+  display: flex;
+  height: 100%;
+}
+.dndflow aside {
+  color: #fff;
+  font-weight: 700;
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  background: rgba(16, 185, 129, 0.75);
+  box-shadow: 0 5px 10px #0000004d;
+  position: relative;
+  z-index: 1000;
+}
+.dndflow aside .nodes > * {
+  margin-bottom: 10px;
+  cursor: -webkit-grab;
+  cursor: grab;
+  font-weight: 500;
+  box-shadow: 5px 5px 10px 2px #00000040;
+}
+.dndflow aside .description {
+  margin-bottom: 10px;
+}
+.dndflow .vue-flow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+@media screen and (min-width: 640px) {
+  .dndflow {
+    flex-direction: row;
+  }
+  .dndflow aside {
+    min-width: 25%;
+  }
+}
+@media screen and (max-width: 639px) {
+  .dndflow aside .nodes {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}
+
+/* -------------------- end of vue flow defaults ----------------------- */
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
