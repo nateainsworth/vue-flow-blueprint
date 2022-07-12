@@ -6,6 +6,7 @@ import {
   Background,
   MiniMap,
   updateEdge,
+  Position
 } from '@braks/vue-flow';
 import { onMounted, computed, ref, markRaw } from 'vue';
 import useStore from './store.js';
@@ -83,20 +84,67 @@ onPaneReady((instance) => instance.fitView());
 const onDrop = (event) => {
   console.log('dropping node');
   const type = event.dataTransfer?.getData('application/vueflow');
-  const test = event.dataTransfer?.getData('test');
-  console.log('result' + test);
+  //todo: use type in if statement to work out what is being added
+
+  const questionID = event.dataTransfer?.getData('questionID');
+  var questionText = event.dataTransfer?.getData('questionText');
+  const questionAnswers = JSON.parse(event.dataTransfer?.getData('questionAnswers'));
 
   const position = instance.value.project({
-    x: event.clientX,
-    y: event.clientY - 40,
-  });
+      x: event.clientX,
+      y: event.clientY - 40,
+    });
+
+  console.log(questionAnswers);
+  console.log(Object.keys(questionAnswers.Answers).length);
+  
+
+  var answerQantity = Object.keys(questionAnswers.Answers).length;
+  var questionHeight = 47 + 40 * answerQantity;
+
+  //const id = nodes.value.length + 1;
   const newNode = {
-    id: getId(),
-    type,
-    position,
-    label: `${type} node`,
+    id: `question_node-${questionID}`,
+    type: 'custominput',
+    label: 'parent',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: position,
+    style: {
+      backgroundColor: 'rgb(232 232 232)',
+      width: '200px',
+      height: `${questionHeight}px`,
+    },
+    class: 'light',
+    data: { questionID: questionID, questionText: 'example question' },
   };
   addNodes([newNode]);
+
+  for (let i = 0; i < answerQantity; i++) {
+    console.log('adding answers');
+
+    let y = 40 + 40 * i;
+    const AnswerChildNode = {
+      id: `answer_node-${i}-to-${questionID}`,
+      type: 'childnode',
+      //label: `Node ${id}`,
+      targetHandle: Position.Left, // or Bottom, Left, Right,
+      sourceHandle: Position.Left,
+      position: {
+        x: 25,
+        y: y,
+      },
+      extent: 'parent',
+      parentNode: `question_node-${questionID}`,
+      class: 'light',
+      expandParent: true,
+      draggable: false,
+      data: { answerID: i + 1, answerText: 'example answer' },
+    };
+    addNodes([AnswerChildNode]);
+  }
+
 };
 </script>
 <script>

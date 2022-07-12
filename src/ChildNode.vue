@@ -33,4 +33,27 @@ export default {
   <!--:is-valid-connection="props.isValidTargetPos"-->
 </template>
 
-<style></style>
+<style>
+
+.vue-flow__node-childnode{
+  border:none;
+}
+
+.vue-flow__node-childnode .vue-flow__handle {
+    background: #586e8a;
+    /*border: 1px solid #586e8a;*/
+     border: 2px solid #e8e8e8;
+    right: -29px;
+    width: 10px;
+    height: 10px;
+}
+/*
+background: #586e8a;
+    border: 2px solid #e8e8e8;
+    right: -29px;
+    width: 10px;
+    height: 10px;
+}
+*/
+
+</style>

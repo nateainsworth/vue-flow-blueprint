@@ -51,15 +51,23 @@ export default {
 
 <style>
 .vue-flow__nodeHeader {
-  width: calc(100% + 20px);
-  margin: -10px;
+  width: calc(100% + 22px);
+  margin: -11px;
   padding: 10px;
-  background-color: #d9d9d9;
+  background-color: #586e8b;
+  color: #ffffff;
+  font-weight: bold;
+  
 }
 
 .vue-flow__handleStyle {
-  background-color: #373f8d;
+  background-color: #ffffff;
+  border: solid 2px #586e8a;
   width: 10px;
   height: 10px;
+}
+
+.vue-flow__node-custominput .vue-flow__handle-left {
+    left: -6px;
 }
 </style>
