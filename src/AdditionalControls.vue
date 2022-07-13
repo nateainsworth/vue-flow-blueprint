@@ -12,10 +12,16 @@ const {
   setTransform,
   toObject,
   updateEdge,
+  onPaneReady,
+  instance,
 } = useVueFlow();
 
+onPaneReady(({ fitView }) => {
+  fitView()
+})
+
 const onSave = () => {
-  localStorage.setItem(flowKey, JSON.stringify(toObject()));
+  localStorage.setItem(flowKey, JSON.stringify(instance.value?.toObject()));
 };
 
 const onRestore = () => {
@@ -25,7 +31,7 @@ const onRestore = () => {
     const [x = 0, y = 0] = flow.position;
     setNodes(flow.nodes);
     setEdges(flow.edges);
-    setTransform({ x, y, zoom: flow.zoom || 0 });
+    instance.value?.setTransform({ x, y, zoom: flow.zoom || 0 });
   }
 };
 
