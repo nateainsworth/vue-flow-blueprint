@@ -116,6 +116,44 @@ const onEndAdd = () => {
   addNodes([newNode]);
 };
 
+const onInvAdd = () => {
+  const id = nodes.value.length + 1;
+  const newNode = {
+    id: `Intevention-Node-${id}`,
+    type: 'inteventionnode',
+    label: 'parent',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: {
+      x: dimensions.value.width / 2,
+      y: dimensions.value.height / 2,
+    },
+    data: { inteventionText: 'Worry Tree Intevention', inteventionDescription: 'Intevention description..........' },
+  };
+  addNodes([newNode]);
+};
+
+const onTreeAdd = () => {
+  const id = nodes.value.length + 1;
+  const newNode = {
+    id: `TreeLink-Node-${id}`,
+    type: 'treelinknode',
+    label: 'parent',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: {
+      x: dimensions.value.width / 2,
+      y: dimensions.value.height / 2,
+    },
+    data: { treelinkText: 'Another Tree', treelinkDescription: 'Links to a different tree' },
+  };
+  addNodes([newNode]);
+};
+
+
+
 function ToggleMenu() {
   console.log('menu location', this.xPosition);
 }
@@ -170,6 +208,19 @@ export default defineComponent({
       this.onEndAdd();
       this.CloseMenu();
     },
+    openQuestionPanel () {
+      this.$emit('questionToggle', true);
+      this.CloseMenu();
+    },
+    openInteventionPanel () {
+      this.$emit('inteventionToggle', true);
+      this.CloseMenu();
+    },
+    openTreesPanel () {
+      this.$emit('treesToggle', true);
+      this.CloseMenu();
+    }
+
   },
 });
 </script>
@@ -182,11 +233,11 @@ export default defineComponent({
   >
     <div class="card-header noselect">Add Node</div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item noselect" @click="onQuestionPressed">
+      <li class="list-group-item noselect" @click="openQuestionPanel">
         Question
       </li>
-      <li class="list-group-item noselect">Intevention</li>
-      <li class="list-group-item noselect">Branch Link</li>
+      <li class="list-group-item noselect" @click="onInvAdd">Intevention</li>
+      <li class="list-group-item noselect" @click="onTreeAdd">Tree Link</li>
       <li class="list-group-item noselect" @click="onEndPressed">
         End Session
       </li>
@@ -196,8 +247,10 @@ export default defineComponent({
   <div class="save__controls">
     <button class="flow-buttons" @click="onSave">save</button>
     <button class="flow-buttons" @click="onRestore">restore</button>
-    <button class="flow-buttons" @click="onAdd">add node</button>
-    <button class="flow-buttons" @click="onEndAdd">add End node</button>
+    <button class="flow-buttons" @click="openQuestionPanel">Add Question Node</button>
+    <button class="flow-buttons" @click="onEndAdd">Add End Node</button>
+    <button class="flow-buttons" @click="onTreeAdd">Add Tree Node</button>
+    <button class="flow-buttons" @click="onInvAdd">Add Intevention Node</button>
   </div>
 </template>
 

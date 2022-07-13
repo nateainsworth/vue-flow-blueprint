@@ -15,13 +15,28 @@ export default {
 };
 </script>
 
-<template>
-  <div>End Session</div>
+<template >
+  <div >End Session</div>
   <Handle
     type="source"
-    :position="Position.right"
+    :position="Position.Top"
     :is-valid-connection="props.isValidTargetPos"
   />
 </template>
 
-<style></style>
+<style>
+.vue-flow__node-endsessionnode{
+  background-color:#b45252;/*#a05757;*/
+  color:#ffffff;
+  font-weight: bold;
+}
+
+.vue-flow__node-endsessionnode .vue-flow__handle-top {
+  right: -6px;
+  background-color: #ffffff;
+  border: solid 2px #b45252;
+  width: 10px;
+  height: 10px;
+}
+
+</style>

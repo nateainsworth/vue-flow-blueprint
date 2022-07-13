@@ -16,10 +16,31 @@ const onDragStart = (event, nodeType, questionID) => {
 
   }
 };
-</script>
 
+</script>
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  // type inference enabled
+  props: {
+    
+  },
+  data() {
+    return {
+      toggle: false,
+    };
+  },
+  methods: {
+    closePanel() {
+      this.$emit('closePanel', true);
+    },
+  },
+});
+</script>
 <template>
   <aside>
+    <div class="closeBtn" @click="closePanel">Close</div>
     <div class="description">You can drag these nodes to the pane.</div>
     <div v-for="(singleQ, index) in questionsData" :key="index">
     <div class="nodes">
@@ -33,3 +54,10 @@ const onDragStart = (event, nodeType, questionID) => {
     </div>
   </aside>
 </template>
+
+<style>
+.closeBtn{
+  color:black;
+}
+
+</style>

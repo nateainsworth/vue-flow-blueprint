@@ -17,6 +17,8 @@ import EndSessionNode from './EndSessionNode.vue';
 import StartSessionNode from './StartSessionNode.vue';
 import Sidebar from './SideBar.vue';
 import OpenEndedNode from './OpenEndedNode.vue';
+import InteventionNode from "./InteventionNode.vue";
+import TreeLinkNode from "./TreeLinkNode.vue";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -29,6 +31,8 @@ const nodeTypes = {
   endsessionnode: markRaw(EndSessionNode),
   startsessionnode: markRaw(StartSessionNode),
   opennode: markRaw(OpenEndedNode),
+  inteventionnode: markRaw(InteventionNode),
+  treelinknode: markRaw(TreeLinkNode),
 };
 
 const store = useStore();
@@ -220,6 +224,9 @@ export default {
     return {
       xPos: 100,
       yPos: 100,
+      qPanel: false,
+      iPanel: false,
+      tPanel: false,
     };
   },
   methods: {
@@ -227,6 +234,22 @@ export default {
       this.xPos = event.clientX;
       this.yPos = event.clientY;
     },
+    openQuestionPanel () {
+      
+      this.qPanel = true;
+    },
+    openInteventionPanel () {
+     this.iPanel = true;
+    },
+    openTreesPanel () {
+     this.tPanel = true;
+    },
+    closePanel(){
+      
+      this.tPanel = false;
+      this.qPanel = false;
+      this.iPanel = false;
+    }
   },
 };
 </script>
@@ -241,13 +264,20 @@ export default {
       @edge-update-start="store.onEdgeUpdateStart"
       @edge-update-end="store.onEdgeUpdateEnd"
       @dragover="onDragOver"
+      
     >
       <!--  
       @mousedown.right="getPosition($event)"
       @contextmenu.prevent
     -->
-      <AdditionalControls :x-position="xPos" :y-position="yPos" />
-      <Sidebar />
+      <AdditionalControls 
+      :x-position="xPos" 
+      :y-position="yPos" 
+      @questionToggle="openQuestionPanel()"
+      @openInteventionPanel="openInteventionPanel()"
+      @openTreesPanel="openTreesPanel()"
+      />
+      <Sidebar v-if="qPanel" @closePanel="closePanel()"/>
       <div style="position: absolute; right: 10px; top: 10px; z-index: 4">
         <button class="flow-buttons" @click="store.log">log store state</button>
       </div>

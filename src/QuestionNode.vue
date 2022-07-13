@@ -4,7 +4,7 @@ import childNode from './ChildNode.vue';
 import { computed } from 'vue';
 
 const sourceHandleStyleB = computed(() => ({
-  top: '20px',
+  top: '18.5px',
 }));
 
 
@@ -54,7 +54,7 @@ export default {
   {{ props.data.questionShort }}</div>
   <Handle
     class="vue-flow__handleStyle"
-    type="source"
+    type="target"
     :position="Position.Left"
     
     :style="sourceHandleStyleB"
