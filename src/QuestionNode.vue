@@ -35,6 +35,10 @@ const onAddWeight = () => {
   })
 }
 
+function capitalizeFirstLetter(string) {
+    return string.toString().charAt(0).toUpperCase() + string.toString().slice(1);
+}
+
 </script>
 
 <script lang="ts">
@@ -45,7 +49,9 @@ export default {
 
 <template>
 
-  <div class="vue-flow__nodeHeader">{{ props.data.questionShort }}</div>
+  <div class="vue-flow__nodeHeader active-tooltip">
+  <div class="top-tooltip">{{capitalizeFirstLetter(props.data.questionText)}}</div>
+  {{ props.data.questionShort }}</div>
   <Handle
     class="vue-flow__handleStyle"
     type="source"
@@ -54,7 +60,6 @@ export default {
     :style="sourceHandleStyleB"
   />
   <div v-if="props.data.openEnded" @click="onAddWeight" class="weightBtn">Add Weight</div>
-
 </template>
 
 <style>

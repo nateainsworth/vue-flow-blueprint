@@ -155,7 +155,7 @@ console.log("is open:" + openended)
       height: `${questionHeight}px`,
     },
     class: 'light',
-    data: { questionID: questionID, questionText: 'example question', questionShort: questionShort,openEnded: openended, event:{
+    data: { questionID: questionID, questionText: questionText, questionShort: questionShort,openEnded: openended, event:{
       click: () => {
         console.log('Node activated')
         addWeights (questionID)
@@ -286,4 +286,135 @@ export default {
   top: 200px;
   left: 400px;
 }
+
+
+/* 
+Tooltip useage
+
+- add class to parent container to activate on hover "active-tooltip"
+- add class "vue-tooltip" to tooltip
+*/
+
+.left-tooltip{
+  position:absolute;
+  top:0;
+  left:0;
+  font-size: 9px;
+  background-color: #2d3f56;
+  color: white;
+  font-weight: 600;
+  border-radius:5px;
+  padding:6px;
+  margin:-6px;
+  width:max-content;
+  transform: translate(calc(-20px - 100%));
+  display:none;
+}
+
+.left-tooltip::after{
+  content:"";
+  position:absolute;
+  top:calc(50% - 8px);
+  right:-4px;
+  width: 0; 
+  height: 0; 
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #2d3f56;
+  z-index:1001;
+}
+
+
+.right-tooltip{
+  position:absolute;
+  top:0;
+  right:0;
+  font-size: 9px;
+  background-color: #2d3f56;
+  color: white;
+  font-weight: 600;
+  border-radius:5px;
+  padding:6px;
+  margin:-6px;
+  width:max-content;
+  transform: translate(calc(100% + 20px));
+  z-index:1001;
+  display:none;
+}
+
+.right-tooltip::after{
+  content:"";
+  position:absolute;
+  top:calc(50% - 8px);
+  left:-4px;
+  width: 0; 
+  height: 0; 
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #2d3f56;;
+}
+
+.top-tooltip{
+  position:absolute;
+  top: -10px;/*top:-100%;*/
+  left:50%;
+  font-size: 9px;
+  background-color: #2d3f56;
+  color: white;
+  font-weight: 600;
+  border-radius:5px;
+  padding:6px;
+  margin:-6px;
+  width:max-content;
+  transform: translate(calc( 50% - 100% + 6px),calc( -50%)); /* calc also adds the padding */
+  z-index:1001;
+  display:none;
+}
+
+.top-tooltip::after{
+  content:"";
+  position:absolute;
+  bottom:calc(0% - 4px);
+  left:calc(50% - 5px);
+  width: 0; 
+  height: 0; 
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-top: 5px solid #2d3f56;;
+}
+
+.bottom-tooltip{
+  position:absolute;
+  top:calc(200% + 6px);
+  left:50%;
+  font-size: 9px;
+  background-color: #2d3f56;
+  color: white;
+  font-weight: 600;
+  border-radius:5px;
+  padding:6px;
+  margin:-6px;
+  width:max-content;
+  transform: translate(calc( 50% - 100% + 6px),0);
+  z-index:1001;
+  display:none;
+}
+
+.bottom-tooltip::after{
+  content:"";
+  position:absolute;
+  top:calc(0% - 4px);
+  left:calc(50% - 5px);
+  width: 0; 
+  height: 0; 
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid #2d3f56;;
+}
+
+
+.active-tooltip:hover .bottom-tooltip,.active-tooltip:hover .top-tooltip,.active-tooltip:hover .left-tooltip,.active-tooltip:hover .right-tooltip{
+  display:block;
+}
+
 </style>

@@ -58,7 +58,7 @@ export default {
 .vue-flow__node-opennode .vue-flow__handle {
     background: #586e8a;
     /*border: 1px solid #586e8a;*/
-     border: 2px solid #e8e8e8;
+    border: 2px solid #e8e8e8;
     right: -29px;
     width: 10px;
     height: 10px;

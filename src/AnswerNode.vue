@@ -26,6 +26,10 @@ function shorten(str, maxLen, separator = ' ') {
 
 const shortenedAnswer = shorten(additionalProps.data.answerText, 30);
 
+function capitalizeFirstLetter(string) {
+    return string.toString().charAt(0).toUpperCase() + string.toString().slice(1);
+}
+
 </script>
 
 <script lang="ts">
@@ -35,9 +39,9 @@ export default {
 </script>
 
 <template>
-  <div class="answers">
-  <div class="answer-tooltip">testing longer text field</div>
-  {{ additionalProps.data.answerID }}: {{ shortenedAnswer }}
+  <div class="answers active-tooltip">
+  <div class="left-tooltip">{{ capitalizeFirstLetter(additionalProps.data.answerText)}}</div>
+  {{additionalProps.data.answerID }}: {{ capitalizeFirstLetter(shortenedAnswer) }}
   </div>
   <Handle type="source" :position="Position.Right" />
   <!--:is-valid-connection="props.isValidTargetPos"-->
@@ -45,16 +49,7 @@ export default {
 
 <style>
 
-.answer-tooltip{
-  position:absolute;
-  top:0;
-  left:0;
-  font-size: 9px;
-  background-color:green;
-  padding:6px;
-  margin:-6px;
-  transform: translate(calc(100% - 100px));
-}
+
 
 .vue-flow__node-answernode{
   border:none;
@@ -67,6 +62,7 @@ export default {
   font-size: 9px;
   position:relative;
 }
+
 
 .vue-flow__node-answernode .vue-flow__handle {
     background: #586e8a;
