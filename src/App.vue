@@ -11,8 +11,8 @@ import {
 import { onMounted, computed, ref, markRaw } from 'vue';
 import useStore from './store.js';
 import AdditionalControls from './AdditionalControls.vue';
-import CustomInput from './CustomInput.vue';
-import ChildNode from './ChildNode.vue';
+import QuestionNode from './QuestionNode.vue';
+import AnswerNode from './AnswerNode.vue';
 import EndSessionNode from './EndSessionNode.vue';
 import StartSessionNode from './StartSessionNode.vue';
 import Sidebar from './SideBar.vue';
@@ -24,8 +24,8 @@ const getId = () => `dndnode_${id++}`;
 const elements = ref([]);
 
 const nodeTypes = {
-  custominput: markRaw(CustomInput),
-  childnode: markRaw(ChildNode),
+  questionnode: markRaw(QuestionNode),
+  answernode: markRaw(AnswerNode),
   endsessionnode: markRaw(EndSessionNode),
   startsessionnode: markRaw(StartSessionNode),
   opennode: markRaw(OpenEndedNode),
@@ -119,7 +119,7 @@ const onDrop = (event) => {
   function addWeights (parentID){
       let y = 60 + 40 * weightID;
       const openEndedNode = {
-      id: `openended_node-${weightID}-to-${parentID}`,
+      id: `weighted_node-${weightID}-to-${parentID}`,
       type: 'opennode',
       //label: `Node ${id}`,
       targetHandle: Position.Left, // or Bottom, Left, Right,
@@ -144,7 +144,7 @@ console.log("is open:" + openended)
   //const id = nodes.value.length + 1;
   const newNode = {
     id: `question_node-${questionID}`,
-    type: 'custominput',
+    type: 'questionnode',
     label: 'parent',
     targetHandle: Position.Left, // or Bottom, Left, Right,
     sourceHandle: Position.Left,
@@ -173,7 +173,7 @@ console.log("is open:" + openended)
     let y = 40 + 40 * i;
     const AnswerChildNode = {
       id: `answer_node-${i}-to-${questionID}`,
-      type: 'childnode',
+      type: 'answernode',
       //label: `Node ${id}`,
       targetHandle: Position.Left, // or Bottom, Left, Right,
       sourceHandle: Position.Left,

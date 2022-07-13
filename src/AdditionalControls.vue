@@ -36,7 +36,7 @@ const onAdd = () => {
   const id = nodes.value.length + 1;
   const newNode = {
     id: `question_node-${id}`,
-    type: 'custominput',
+    type: 'questionnode',
     label: 'parent',
     //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
@@ -61,7 +61,7 @@ const onAdd = () => {
     let y = 40 + 40 * i;
     const AnswerChildNode = {
       id: `answer_node-${i}-to-${id}`,
-      type: 'childnode',
+      type: 'answernode',
       //label: `Node ${id}`,
       targetHandle: Position.Left, // or Bottom, Left, Right,
       sourceHandle: Position.Left,

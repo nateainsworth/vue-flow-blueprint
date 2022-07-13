@@ -17,7 +17,8 @@ const useStore = defineStore('elementsStore', {
   },
   actions: {
     log() {
-      console.log('stored elements', this.elements);
+      //console.log('stored elements', this.elements);
+      console.log(JSON.stringify(this.elements))
     },
     onEdgeUpdateStart(edge) {
       console.log('start update', edge);

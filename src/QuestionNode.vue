@@ -75,7 +75,7 @@ export default {
   height: 10px;
 }
 
-.vue-flow__node-custominput .weightBtn{
+.vue-flow__node-questionnode .weightBtn{
     text-align:center;
     background-color:#586e8a;
     color: #ffffff;
@@ -87,7 +87,7 @@ export default {
 */    
 }
 
-.vue-flow__node-custominput .vue-flow__handle-left {
+.vue-flow__node-questionnode .vue-flow__handle-left {
     left: -6px;
 }
 </style>

@@ -35,25 +35,40 @@ export default {
 </script>
 
 <template>
-  <div class="answers">{{ additionalProps.data.answerID }}: {{ shortenedAnswer }}</div>
+  <div class="answers">
+  <div class="answer-tooltip">testing longer text field</div>
+  {{ additionalProps.data.answerID }}: {{ shortenedAnswer }}
+  </div>
   <Handle type="source" :position="Position.Right" />
   <!--:is-valid-connection="props.isValidTargetPos"-->
 </template>
 
 <style>
 
-.vue-flow__node-childnode{
+.answer-tooltip{
+  position:absolute;
+  top:0;
+  left:0;
+  font-size: 9px;
+  background-color:green;
+  padding:6px;
+  margin:-6px;
+  transform: translate(calc(100% - 100px));
+}
+
+.vue-flow__node-answernode{
   border:none;
   padding: 10px 0px;
   text-align:left;
   
 }
 
-.vue-flow__node-childnode .answers{
+.vue-flow__node-answernode .answers{
   font-size: 9px;
+  position:relative;
 }
 
-.vue-flow__node-childnode .vue-flow__handle {
+.vue-flow__node-answernode .vue-flow__handle {
     background: #586e8a;
     /*border: 1px solid #586e8a;*/
      border: 2px solid #e8e8e8;
