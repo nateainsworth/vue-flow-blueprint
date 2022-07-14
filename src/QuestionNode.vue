@@ -56,41 +56,17 @@ export default {
     class="vue-flow__handleStyle"
     type="target"
     :position="Position.Left"
-    
     :style="sourceHandleStyleB"
   />
-<!--
+  <!--
   <div class="quickConnect active-tooltip" @mousedown="mouseDown">
     <div class="top-tooltip">Quick Connect</div>
   </div>
   -->
 
-<QuickConnectHandle class="quickConnect" :questionID="props.data.questionID" :answerQuantity="props.data.answersQuantity"/>
+  <QuickConnectHandle v-if="!props.data.openEnded" class="quickConnect" :questionID="props.data.questionID" :answerQuantity="props.data.answersQuantity"/>
 
-
-<!--<div
-    :data-handleid="props.id"
-    :data-nodeid="nodeId"
-    :data-handlepos="props.position"
-    class="vue-flow__handle nodrag quickConnect active-tooltip"
-    :class="[
-      `vue-flow__handle-${props.position}`,
-      `vue-flow__handle-${id}`,
-      {
-        source: props.type !== 'target',
-        target: props.type === 'target',
-        connectable: props.connectable,
-        connecting:
-          connectionStartHandle?.nodeId === nodeId &&
-          connectionStartHandle?.handleId === props.id &&
-          connectionStartHandle?.type === props.type,
-      },
-    ]"
-    @mousedown="onMouseDownHandler"
-    @click="onClickHandler"
-  ><div class="top-tooltip">Quick Connect</div></div>
-
-  <div v-if="props.data.openEnded" @click="onAddWeight" class="weightBtn">Add Weight</div>-->
+  <div v-if="props.data.openEnded" @click="onAddWeight" class="weightBtn">Add Weight</div>
 </template>
 
 <style>

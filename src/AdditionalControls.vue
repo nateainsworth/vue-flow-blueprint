@@ -13,15 +13,23 @@ const {
   toObject,
   updateEdge,
   onPaneReady,
-  instance,
+  fitView,
+  project,
 } = useVueFlow();
+
 
 onPaneReady(({ fitView }) => {
   fitView()
 })
 
+  const position = project({
+      x: dimensions.value.width+100,
+      y: dimensions.value.height,
+    });
+
+
 const onSave = () => {
-  localStorage.setItem(flowKey, JSON.stringify(instance.value?.toObject()));
+  localStorage.setItem(flowKey, JSON.stringify(toObject()));//instance.value?.
 };
 
 const onRestore = () => {
@@ -31,7 +39,7 @@ const onRestore = () => {
     const [x = 0, y = 0] = flow.position;
     setNodes(flow.nodes);
     setEdges(flow.edges);
-    instance.value?.setTransform({ x, y, zoom: flow.zoom || 0 });
+    setTransform({ x, y, zoom: flow.zoom || 0 });//instance.value?.
   }
 };
 
@@ -47,10 +55,10 @@ const onAdd = () => {
     //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
     sourceHandle: Position.Left,
-    position: {
+    position: position, /*{
       x: dimensions.value.width / 2,
       y: dimensions.value.height / 2,
-    },
+    },*/
     style: {
       backgroundColor: 'rgb(232 232 232)',
       width: '200px',
@@ -105,7 +113,8 @@ const onAdd = () => {
   //, newChildNode, newChildNode2
 };
 
-const onEndAdd = () => {
+const onEndAdd = (event) => {
+  
   const id = nodes.value.length + 1;
   const newNode = {
     id: `End-Session-Node-${id}`,
@@ -114,9 +123,9 @@ const onEndAdd = () => {
     //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
     sourceHandle: Position.Left,
-    position: {
-      x: dimensions.value.width / 2,
-      y: dimensions.value.height / 2,
+    position:  {
+      x: dimensions.value.width / 100,
+      y: dimensions.value.height / 100,
     },
   };
   addNodes([newNode]);
@@ -131,10 +140,10 @@ const onInvAdd = () => {
     //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
     sourceHandle: Position.Left,
-    position: {
+    position: position, /*{
       x: dimensions.value.width / 2,
       y: dimensions.value.height / 2,
-    },
+    },*/
     data: { inteventionText: 'Worry Tree Intevention', inteventionDescription: 'Intevention description..........' },
   };
   addNodes([newNode]);
@@ -149,10 +158,10 @@ const onTreeAdd = () => {
     //label: `Node ${id}`,
     targetHandle: Position.Left, // or Bottom, Left, Right,
     sourceHandle: Position.Left,
-    position: {
+    position: position, /*{
       x: dimensions.value.width / 2,
       y: dimensions.value.height / 2,
-    },
+    },*/
     data: { treelinkText: 'Another Tree', treelinkDescription: 'Links to a different tree' },
   };
   addNodes([newNode]);
@@ -254,7 +263,7 @@ export default defineComponent({
     <button class="flow-buttons" @click="onSave">save</button>
     <button class="flow-buttons" @click="onRestore">restore</button>
     <button class="flow-buttons" @click="openQuestionPanel">Add Question Node</button>
-    <button class="flow-buttons" @click="onEndAdd">Add End Node</button>
+    <button class="flow-buttons" @click="onEndAdd($event)">Add End Node</button>
     <button class="flow-buttons" @click="onTreeAdd">Add Tree Node</button>
     <button class="flow-buttons" @click="onInvAdd">Add Intevention Node</button>
   </div>

@@ -6,7 +6,7 @@ import {
   Background,
   MiniMap,
   updateEdge,
-  Position
+  Position,
 } from '@braks/vue-flow';
 import { onMounted, computed, ref, markRaw } from 'vue';
 import useStore from './store.js';
@@ -47,7 +47,7 @@ const {
   edges,
   onPaneReady,
   instance,
-  updateNodeInternals,
+  fitView ,
 } = useVueFlow();
 
 //onConnect((params) => addEdges([params]));
@@ -61,6 +61,7 @@ onConnect((params) => {
   ]);
 });
 
+fitView();
 /*
 onMounted(() => {
   elements.value = [
@@ -88,7 +89,8 @@ const onDragOver = (event) => {
 //const position = vueFlowInstance.project({ x: event.clientX - 40, y: event.clientY - 18 });
 
 //var newinstance;
-onPaneReady((instance) => instance.fitView());
+//onPaneReady((instance) => instance.fitView());
+
 
 
   var weightID = 1;
@@ -126,7 +128,7 @@ const onDrop = (event) => {
   const questionAnswers = JSON.parse(event.dataTransfer?.getData('questionAnswers'));
   const questionShort = event.dataTransfer.getData('questionShort');
 
-  const position = instance.value.project({
+  const position = project({
       x: event.clientX,
       y: event.clientY - 40,
     });

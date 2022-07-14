@@ -19,6 +19,7 @@ interface QuickConnectProps extends HandleProps {
   answerQuantity: Number
 }
 
+const quicknodeID = `question_node-${props.questionID}`;
 
 const props = withDefaults(defineProps<QuickConnectProps>(), {
   type: 'source',
@@ -39,13 +40,19 @@ const onMouseDownHandler = (event: MouseEvent) => {
       hooks.value.connect.trigger(connection),
     )
   }
+  var nodeId = `vue-flow__quick-handle-${props.questionID}`;
+  onMouseDown(event, props.id ?? null, quicknodeID, props.type === 'target', props.isValidConnection, undefined, (connection) =>{}
+      //hooks.value.connect.trigger(connection),
+    )
 }
 
 const onClickHandler = (event: MouseEvent) => {
-  for(var i = 0; i < props.answerQuantity; i++){
+  var nodeId = `vue-flow__quick-handle-${props.questionID}`;
+  onClick(event, props.id ?? null, nodeId, props.type, props.isValidConnection)
+  /*for(var i = 0; i < props.answerQuantity; i++){
     const nodeId = `answer_node-${i}-to-${props.questionID}`;
     onClick(event, props.id ?? null, nodeId, props.type, props.isValidConnection)
-  }
+  }*/
 }
 </script>
 
@@ -55,28 +62,29 @@ export default {
 }
 </script>
 
+
 <template>
   <div
     :data-handleid="props.id"
     :data-nodeid="nodeId"
     :data-handlepos="props.position"
-    class="vue-flow__handle nodrag"
+    class="vue-flow__handle nodrag active-tooltip"
     :class="[
       `vue-flow__handle-${props.position}`,
-      `vue-flow__handle-${id}`,
+      `vue-flow__quick-handle-${props.questionID}`,
       {
         source: props.type !== 'target',
         target: props.type === 'target',
         connectable: props.connectable,
         connecting:
-          connectionStartHandle?.nodeId === nodeId &&
+          connectionStartHandle?.quicknodeId === quicknodeId &&
           connectionStartHandle?.handleId === props.id &&
           connectionStartHandle?.type === props.type,
       },
     ]"
     @mousedown="onMouseDownHandler"
     @click="onClickHandler"
-  >
-    <slot :node-id="nodeId" v-bind="props"></slot>
+  ><div class="top-tooltip">Quick Connect</div>
+    <slot :node-id="quicknodeId" v-bind="props"></slot>
   </div>
 </template>
