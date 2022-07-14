@@ -44,6 +44,7 @@ export default {
   {{additionalProps.data.answerID }}: {{ capitalizeFirstLetter(shortenedAnswer) }}
   </div>
   <Handle type="source" :position="Position.Right" />
+ 
   <!--:is-valid-connection="props.isValidTargetPos"-->
 </template>
 

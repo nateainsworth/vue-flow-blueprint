@@ -90,6 +90,32 @@ const onDragOver = (event) => {
 //var newinstance;
 onPaneReady((instance) => instance.fitView());
 
+
+  var weightID = 1;
+
+  function addWeights (parentID){
+      let y = 60 + 40 * weightID;
+      const openEndedNode = {
+      id: `weighted_node-${weightID}-to-${parentID}`,
+      type: 'opennode',
+      //label: `Node ${id}`,
+      targetHandle: Position.Left, // or Bottom, Left, Right,
+      sourceHandle: Position.Left,
+      position: {
+        x: 25,
+        y: y,
+      },
+      extent: 'parent',
+      parentNode: `question_node-${parentID}`,
+      class: 'light',
+      expandParent: true,
+      draggable: false,
+      data: { answerID: '100',isWeight:true,parentID:parentID},
+    };
+    addNodes([openEndedNode]);
+    weightID++;
+  }
+
 const onDrop = (event) => {
   console.log('dropping node');
   const type = event.dataTransfer?.getData('application/vueflow');
@@ -118,30 +144,7 @@ const onDrop = (event) => {
     openended = true;
   }
 
-  var weightID = 1;
 
-  function addWeights (parentID){
-      let y = 60 + 40 * weightID;
-      const openEndedNode = {
-      id: `weighted_node-${weightID}-to-${parentID}`,
-      type: 'opennode',
-      //label: `Node ${id}`,
-      targetHandle: Position.Left, // or Bottom, Left, Right,
-      sourceHandle: Position.Left,
-      position: {
-        x: 25,
-        y: y,
-      },
-      extent: 'parent',
-      parentNode: `question_node-${parentID}`,
-      class: 'light',
-      expandParent: true,
-      draggable: false,
-      data: { answerID: '100',isWeight:true,parentID:parentID},
-    };
-    addNodes([openEndedNode]);
-    weightID++;
-  }
 
 console.log("is open:" + openended)
   
@@ -159,7 +162,7 @@ console.log("is open:" + openended)
       height: `${questionHeight}px`,
     },
     class: 'light',
-    data: { questionID: questionID, questionText: questionText, questionShort: questionShort,openEnded: openended, event:{
+    data: { questionID: questionID, questionText: questionText, questionShort: questionShort,openEnded: openended,answersQuantity:answerQantity, event:{
       click: () => {
         console.log('Node activated')
         addWeights (questionID)
