@@ -22,7 +22,7 @@ interface QuickConnectProps extends HandleProps {
 
 const props = withDefaults(defineProps<QuickConnectProps>(), {
   type: 'source',
-  position: 'top' as Position,
+  position: 'right' as Position,
   connectable: true,
 })
 

@@ -65,8 +65,10 @@ export default {
   </div>
   -->
 
-<QuickConnectHandle :questionID="props.data.questionID" :answerQuantity="props.data.answersQuantity"/>
-<div
+<QuickConnectHandle class="quickConnect" :questionID="props.data.questionID" :answerQuantity="props.data.answersQuantity"/>
+
+
+<!--<div
     :data-handleid="props.id"
     :data-nodeid="nodeId"
     :data-handlepos="props.position"
@@ -88,7 +90,7 @@ export default {
     @click="onClickHandler"
   ><div class="top-tooltip">Quick Connect</div></div>
 
-  <div v-if="props.data.openEnded" @click="onAddWeight" class="weightBtn">Add Weight</div>
+  <div v-if="props.data.openEnded" @click="onAddWeight" class="weightBtn">Add Weight</div>-->
 </template>
 
 <style>
@@ -100,7 +102,7 @@ export default {
   height: 10px;
   right:-6px;
   position:absolute;
-  top:14px;
+  top:18px;
   border-radius: 100%;
 }
 
