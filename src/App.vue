@@ -125,16 +125,19 @@ const onDrop = (event) => {
   const type = event.dataTransfer?.getData('application/vueflow');
 
   //todo: use type in if statement to work out what is being added
+
+    const position = project({
+      x: event.clientX,
+      y: event.clientY - 40,
+    });
+
 if(type == 'questionnode'){
   const questionID = event.dataTransfer?.getData('questionID');
   const questionText = event.dataTransfer?.getData('questionText');
   const questionAnswers = JSON.parse(event.dataTransfer?.getData('questionAnswers'));
   const questionShort = event.dataTransfer.getData('questionShort');
 
-  const position = project({
-      x: event.clientX,
-      y: event.clientY - 40,
-    });
+
 
   console.log(questionAnswers);
   console.log(Object.keys(questionAnswers.Answers).length);
@@ -224,15 +227,46 @@ console.log("is open:" + openended)
     addNodes([openEndedNode]);
   }
 }else if(type == 'inteventionnode'){
-        event.dataTransfer?.effectAllowed = 'move';
-    event.dataTransfer?.getData('inteventionID');
-    event.dataTransfer?.getData('inteventionDesc');
-    event.dataTransfer?.getData('inteventionTitle');
+
+    const inteventionId = event.dataTransfer?.getData('inteventionID');
+   const inteventionDesc =  event.dataTransfer?.getData('inteventionDesc');
+    const inteventionTitle = event.dataTransfer?.getData('inteventionTitle');
+
+  const newNode = {
+    id: `Intevention-Node-${inteventionId}`,
+    type: 'inteventionnode',
+    label: 'parent',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: position,/*{
+      x: dimensions.value.width / 2,
+      y: dimensions.value.height / 2,
+    },*/
+    data: { inteventionText: inteventionTitle, inteventionDescription: inteventionDesc },
+  };
+  addNodes([newNode]);
 }else if(type == 'treelinknode'){
 
     const treeLinkId = event.dataTransfer?.getData('treelinkID');
     const treeDesc =event.dataTransfer?.getData('treelinkDesc');
     const treeTitle =event.dataTransfer?.getData('treelinkTitle');
+
+
+  const newNode = {
+    id: `TreeLink-Node-${treeLinkId}`,
+    type: 'treelinknode',
+    label: 'parent',
+    //label: `Node ${id}`,
+    targetHandle: Position.Left, // or Bottom, Left, Right,
+    sourceHandle: Position.Left,
+    position: position, /*{
+      x: dimensions.value.width / 2,
+      y: dimensions.value.height / 2,
+    },*/
+    data: { treelinkText: treeTitle, treelinkDescription: treeDesc },
+  };
+  addNodes([newNode]);
 }
 };
 </script>
