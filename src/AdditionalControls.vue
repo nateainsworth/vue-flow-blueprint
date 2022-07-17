@@ -264,8 +264,8 @@ export default defineComponent({
     <button class="flow-buttons" @click="onRestore">restore</button>
     <button class="flow-buttons" @click="openQuestionPanel">Add Question Node</button>
     <button class="flow-buttons" @click="onEndAdd($event)">Add End Node</button>
-    <button class="flow-buttons" @click="onTreeAdd">Add Tree Node</button>
-    <button class="flow-buttons" @click="onInvAdd">Add Intevention Node</button>
+    <button class="flow-buttons" @click="openTreesPanel">Add Tree Node</button>
+    <button class="flow-buttons" @click="openInteventionPanel">Add Intevention Node</button>
   </div>
 </template>
 

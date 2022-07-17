@@ -47,7 +47,7 @@ export default defineComponent({
       <div
         class="vue-flow__node-select"
         :draggable="true"
-        @dragstart="onDragStart($event, 'default', index)">
+        @dragstart="onDragStart($event, 'questionnode', index)">
         {{singleQ.Question}}
       </div>
     </div>

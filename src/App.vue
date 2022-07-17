@@ -15,7 +15,9 @@ import QuestionNode from './QuestionNode.vue';
 import AnswerNode from './AnswerNode.vue';
 import EndSessionNode from './EndSessionNode.vue';
 import StartSessionNode from './StartSessionNode.vue';
-import Sidebar from './SideBar.vue';
+import QuestionBar from './QuestionBar.vue';
+import TreeBar from './TreeBar.vue';
+import InteventionBar from './InteventionBar.vue';
 import OpenEndedNode from './OpenEndedNode.vue';
 import InteventionNode from "./InteventionNode.vue";
 import TreeLinkNode from "./TreeLinkNode.vue";
@@ -121,8 +123,9 @@ const onDragOver = (event) => {
 const onDrop = (event) => {
   console.log('dropping node');
   const type = event.dataTransfer?.getData('application/vueflow');
-  //todo: use type in if statement to work out what is being added
 
+  //todo: use type in if statement to work out what is being added
+if(type == 'questionnode'){
   const questionID = event.dataTransfer?.getData('questionID');
   const questionText = event.dataTransfer?.getData('questionText');
   const questionAnswers = JSON.parse(event.dataTransfer?.getData('questionAnswers'));
@@ -220,7 +223,17 @@ console.log("is open:" + openended)
     };
     addNodes([openEndedNode]);
   }
+}else if(type == 'inteventionnode'){
+        event.dataTransfer?.effectAllowed = 'move';
+    event.dataTransfer?.getData('inteventionID');
+    event.dataTransfer?.getData('inteventionDesc');
+    event.dataTransfer?.getData('inteventionTitle');
+}else if(type == 'treelinknode'){
 
+    const treeLinkId = event.dataTransfer?.getData('treelinkID');
+    const treeDesc =event.dataTransfer?.getData('treelinkDesc');
+    const treeTitle =event.dataTransfer?.getData('treelinkTitle');
+}
 };
 </script>
 <script>
@@ -240,7 +253,6 @@ export default {
       this.yPos = event.clientY;
     },
     openQuestionPanel () {
-      
       this.qPanel = true;
     },
     openInteventionPanel () {
@@ -279,10 +291,12 @@ export default {
       :x-position="xPos" 
       :y-position="yPos" 
       @questionToggle="openQuestionPanel()"
-      @openInteventionPanel="openInteventionPanel()"
-      @openTreesPanel="openTreesPanel()"
+      @inteventionToggle="openInteventionPanel()"
+      @treesToggle="openTreesPanel()"
       />
-      <Sidebar v-if="qPanel" @closePanel="closePanel()"/>
+      <QuestionBar v-if="qPanel" @closePanel="closePanel()"/>
+      <TreeBar v-if="tPanel" @closePanel="closePanel()"/>
+      <InteventionBar v-if="iPanel" @closePanel="closePanel()"/>
       <div style="position: absolute; right: 10px; top: 10px; z-index: 4">
         <button class="flow-buttons" @click="store.log">log store state</button>
       </div>
