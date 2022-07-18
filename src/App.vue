@@ -21,6 +21,7 @@ import InteventionBar from './InteventionBar.vue';
 import OpenEndedNode from './OpenEndedNode.vue';
 import InteventionNode from "./InteventionNode.vue";
 import TreeLinkNode from "./TreeLinkNode.vue";
+import eventBus from './event-bus';
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -98,8 +99,8 @@ const onDragOver = (event) => {
   var weightID = 1;
 
   function addWeights (parentID){
-      let y = 60 + 40 * weightID;
-      const openEndedNode = {
+    let y = 60 + 40 * weightID;
+    const openEndedNode = {
       id: `weighted_node-${weightID}-to-${parentID}`,
       type: 'opennode',
       //label: `Node ${id}`,
@@ -119,6 +120,15 @@ const onDragOver = (event) => {
     addNodes([openEndedNode]);
     weightID++;
   }
+
+
+
+eventBus.$on('addWeight', (id) => {
+  console.log(`add weight: ${id}`);
+  addWeights (id);
+  
+})
+
 
 const onDrop = (event) => {
   console.log('dropping node');
@@ -170,16 +180,26 @@ console.log("is open:" + openended)
       height: `${questionHeight}px`,
     },
     class: 'light',
-    data: { questionID: questionID, questionText: questionText, questionShort: questionShort,openEnded: openended,answersQuantity:answerQantity, event:{
+    data: { questionID: questionID, questionText: questionText, questionShort: questionShort,openEnded: openended,answersQuantity:answerQantity
+    },
+    events: {
+      /*click: () => {
+        console.log('Node activated')
+        
+      },*/
+      customEvent: () => {
+        console.log('Node 1 custom event');
+        //addWeights (questionID)
+      },
+    },
+    /*
+    , event:{
       click: () => {
         console.log('Node activated')
         addWeights (questionID)
       },
-    
-      
     },
-    },
-    
+    */
     
   };
   addNodes([newNode]);

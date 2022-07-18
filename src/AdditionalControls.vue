@@ -30,6 +30,7 @@ onPaneReady(({ fitView }) => {
 
 const onSave = () => {
   localStorage.setItem(flowKey, JSON.stringify(toObject()));//instance.value?.
+  console.log(localStorage)
 };
 
 const onRestore = () => {
@@ -172,6 +173,19 @@ const onTreeAdd = () => {
 function ToggleMenu() {
   console.log('menu location', this.xPosition);
 }
+
+/*
+var emitter = require('tiny-emitter/instance');
+ 
+emitter.on('addWeight', function (arg1) {
+  console.log('emit recieved by additionalControls width' + arg1);
+});
+*/
+/*
+ consol.log('emit recieved by additionalControls')
+});*/
+
+
 </script>
 <script>
 import { defineComponent } from 'vue';

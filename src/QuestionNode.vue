@@ -3,30 +3,55 @@ import { Handle, Position, NodeEventsOn ,NodeProps } from '@braks/vue-flow';
 import childNode from './ChildNode.vue';
 import { computed } from 'vue';
 import QuickConnectHandle from './QuickConnectHandle.vue';
+import eventBus from './event-bus';
+
+
+interface CustomNodeEvents {
+  //click: NodeEventsOn['click'],
+  customEvent: (input: string) => void,
+}
 
 
 const sourceHandleStyleB = computed(() => ({
   top: '18.5px',
 }));
 
-interface QuestionNodeProps extends NodeProps {
+interface QuestionNodeProps extends NodeProps<any, CustomNodeEvents>  {
+  type: string;
+  selected: string;
+  connectable: boolean;
+  position: {
+    x: Number;
+    y: Number;
+  }
+  
   data: {
     questionID: Number;
     answersQuantity: Number;
     questionText: string;
     questionShort: string;
-    openEnded:Boolean;
+    openEnded: Boolean;
     event: NodeEventsOn['click'];
-  };  
+  };
+  id: string;
+  events: CustomNodeEvents;
 }
 
 const props = defineProps<QuestionNodeProps>();
 
 console.log(props);
 
+
+
 const onAddWeight = () => {
-  props.data.event.click(() => {
-  })
+  /*props.data.event.click(() => {
+  })*/
+  //props.events.click()//() =>x {
+  //console.log(`Node ${props.id} clicked`)
+//})
+
+eventBus.$emit('addWeight', props.data.questionID )
+  //props.events.customEvent('custom event triggered');
 }
 
 function capitalizeFirstLetter(string) {
@@ -36,6 +61,11 @@ function capitalizeFirstLetter(string) {
 const mouseDown = () => {
   console.log("Quick Connect started");
 }
+
+/*var emitter = require('tiny-emitter/instance');
+ 
+emitter.emit('addWeight', props.data.question.id );
+*/
 
 
 
