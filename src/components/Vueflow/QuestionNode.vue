@@ -3,7 +3,7 @@ import { Handle, Position, NodeEventsOn ,NodeProps } from '@braks/vue-flow';
 import childNode from './ChildNode.vue';
 import { computed } from 'vue';
 import QuickConnectHandle from './QuickConnectHandle.vue';
-import eventBus from './event-bus';
+import eventBus from '../../event-bus';
 
 
 interface CustomNodeEvents {
