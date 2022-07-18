@@ -123,13 +123,43 @@ const onDragOver = (event) => {
     weightID++;
   }
 
+/*
+import { useEventBus } from '@vueuse/core';
+const bus = useEventBus('addWeight');
+
+bus.on((event, arg2) => {
+  console.log(`addWeight: ${event} : ${arg2}`)
+  // `e` will be `{ name: foo }`
+})
+*/
+// listen to an event
+//const unsubscribe = bus.on(listener);
+/*
+bus.on('addWeight', (id) => {
+  console.log('event called');
+  // `e` will be `{ name: foo }`
+})*/
 
 
-eventBus.$on('addWeight', (id) => {
+
+//bus.emit("10","test2");
+//eventBus.$on('addWeight')
+
+eventBus.on('addWeight', (id, arg2) => {
   console.log(`add weight: ${id}`);
   addWeights (id);
-  
+  //eventBus.reset('addWeight');
+ 
 })
+/*
+eventBus.off('addWeight', (id, arg2) => {
+  console.log(`add weight turned off: ${id}`);
+ 
+ 
+})
+*/
+
+
 
 
 const onDrop = (event) => {

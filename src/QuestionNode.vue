@@ -50,7 +50,7 @@ const onAddWeight = () => {
   //console.log(`Node ${props.id} clicked`)
 //})
 
-eventBus.$emit('addWeight', props.data.questionID )
+eventBus.emit('addWeight', props.data.questionID )
   //props.events.customEvent('custom event triggered');
 }
 
