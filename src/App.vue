@@ -51,7 +51,9 @@ const {
   onPaneReady,
   instance,
   fitView ,
-} = useVueFlow();
+} = useVueFlow({
+  selectionKeyCode: 'Shift'
+});
 
 //onConnect((params) => addEdges([params]));
 
@@ -345,6 +347,7 @@ export default {
       @edge-update-start="store.onEdgeUpdateStart"
       @edge-update-end="store.onEdgeUpdateEnd"
       @dragover="onDragOver"
+      selection-key-code="Shift"
       
     >
       <!--  
