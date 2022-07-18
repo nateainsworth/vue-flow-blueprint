@@ -308,12 +308,22 @@ export default {
     },
     openQuestionPanel () {
       this.qPanel = true;
+
+      this.tPanel = false;
+     
+      this.iPanel = false;
     },
     openInteventionPanel () {
      this.iPanel = true;
+      this.tPanel = false;
+      this.qPanel = false;
+     
     },
     openTreesPanel () {
      this.tPanel = true;
+ 
+      this.qPanel = false;
+      this.iPanel = false;
     },
     closePanel(){
       
