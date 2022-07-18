@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* eslint-disable */
 import { Handle, Position, NodeEventsOn ,NodeProps } from '@braks/vue-flow';
 import childNode from './ChildNode.vue';
 import { computed } from 'vue';
@@ -72,6 +73,7 @@ emitter.emit('addWeight', props.data.question.id );
 </script>
 
 <script lang="ts">
+/* eslint-disable */
 export default {
   inheritAttrs: true,
 };
@@ -101,7 +103,7 @@ export default {
 
 <style>
 
-.quickConnect{
+.vue-flow__handle.quickConnect{
   background-color: #586e8a;
   border: solid 2px #ffffff;
   width: 10px;
@@ -122,7 +124,7 @@ export default {
   
 }
 
-.vue-flow__handleStyle {
+.vue-flow__handle.vue-flow__handleStyle {
   background-color: #ffffff;
   border: solid 2px #586e8a;
   width: 10px;
