@@ -396,6 +396,7 @@ export default {
       <InteventionBar v-if="iPanel" @closePanel="closePanel()"/>
       <div style="position: absolute; right: 10px; top: 10px; z-index: 4">
         <button class="flow-buttons" @click="store.log">log store state</button>
+        <button class="flow-buttons" @click="store.restore">restore log state</button>
       </div>
       <Background pattern-color="#aaa" gap="8" />
 

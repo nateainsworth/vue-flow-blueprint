@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@braks/vue-flow": "^0.4.27",
+    "@braks/vue-flow": "^0.4.29",
     "@vueuse/core": "^8.9.4",
     "pinia": "^2.0.14",
     "tiny-emitter": "^2.1.0",
