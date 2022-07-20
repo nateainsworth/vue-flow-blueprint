@@ -16,6 +16,7 @@ import AnswerNode from '../Vueflow/AnswerNode.vue';
 import EndSessionNode from '../Vueflow/EndSessionNode.vue';
 import StartSessionNode from '../Vueflow/StartSessionNode.vue';
 import QuestionBar from '../Vueflow/QuestionBar.vue';
+import FlowLoader from '../Vueflow/VueFlowLoader.vue';
 import TreeBar from '../Vueflow/TreeBar.vue';
 import InteventionBar from '../Vueflow/InteventionBar.vue';
 import OpenEndedNode from '../Vueflow/OpenEndedNode.vue';
@@ -368,6 +369,7 @@ export default {
 </script>
 
 <template>
+  <FlowLoader />
   <div class="dndflow" @drop="onDrop">
     <VueFlow
       v-model="store.elements"
@@ -402,6 +404,7 @@ export default {
 
       <MiniMap />
       <Controls />
+      
     </VueFlow>
   </div>
 </template>
