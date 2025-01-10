@@ -19,9 +19,9 @@ export default defineComponent({
 });
 </script>
 <template>
-<div class="loader-panel-bg"></div>
-<div class="loader-panel">
-<div class="loader-contents">
+<div class="loader-panel-bg" v-if="false"></div>
+<div class="loader-panel" v-if="false">
+<div class="loader-contents" v-if="false">
 <h2>Load</h2>
 <hr/>
  <p>Session Flow diagrams which change the activity of the Virtual Coach</p>
